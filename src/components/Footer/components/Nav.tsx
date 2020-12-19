@@ -8,26 +8,14 @@ const Nav: React.FC = () => {
       <StyledRouterLink exact to="/addresses">
         Addresses
       </StyledRouterLink>
-      <StyledLink href="https://github.com/yam-finance/yam-www" target="_blank">
-        Github
-      </StyledLink>
-      <StyledLink href="https://twitter.com/YamFinance" target="_blank">
+      <StyledLink href="https://twitter.com/ubiqsmart" target="_blank">
         Twitter
       </StyledLink>
-      <StyledLink href="https://discord.gg/nKKhBbk" target="_blank">
+      <StyledLink href="https://discord.gg/XaqzJB4" target="_blank">
         Discord
       </StyledLink>
-      <StyledLink href="https://snapshot.page/#/yam" target="_blank">
-        Proposals
-      </StyledLink>
-      <StyledLink href="https://medium.com/yam-finance" target="_blank">
+      <StyledLink href="https://blog.ubiqsmart.com/" target="_blank">
         Medium
-      </StyledLink>
-      <StyledLink href="https://forum.yam.finance" target="_blank">
-        Forum
-      </StyledLink>
-      <StyledLink href="https://yam.gitbook.io/yam/" target="_blank">
-        Docs
       </StyledLink>
     </StyledNav>
   );
