@@ -24,7 +24,7 @@ const Home: React.FC = () => {
       <PageHeader
         icon={darkMode ? "🌚" : "🌞"}
         subtitle={darkMode ? "🤫 shhh... the TGE1s are sleeping." : "It's a great day to farm TGE1s!"}
-        title="Welcome to YAM Finance."
+        title="Welcome to TGE Framework."
       />
       <Container>
         <RegisterVoteNotice />
