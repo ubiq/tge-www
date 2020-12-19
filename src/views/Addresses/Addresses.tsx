@@ -33,7 +33,7 @@ const Addresses: React.FC = () => {
           name="YAM"
           address={yamv3}
           uniswap={true}
-          unitext="Buy at Sushiswap"
+          unitext="Buy at Shinobi"
           unilink="https://exchange.sushiswapclassic.org/#/?inputCurrency="
         />
         <AddressButton name="yUSD" address={yUsd} uniswap={true} />

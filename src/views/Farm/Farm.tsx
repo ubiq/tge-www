@@ -33,7 +33,7 @@ const Farm: React.FC = () => {
 
   return (
     <Page>
-      <PageHeader icon="🌾🍠" subtitle="Stake YAM/ETH Sushiswap LP tokens and grow YAMs" title="Farm" />
+      <PageHeader icon="🌾🍠" subtitle="Stake YAM/ETH Shinobi LP tokens and grow YAMs" title="Farm" />
       <Container>
         <HarvestLPsNoticeYAMYUSD />
         <ResumedLPsNotice />
