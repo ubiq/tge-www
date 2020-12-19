@@ -11,7 +11,6 @@ import HarvestCard from "./components/Harvest";
 import StakeCard from "./components/Stake";
 import PausedLPsNotice from "./components/PausedLPsNotice";
 import ResumedLPsNotice from "./components/ResumedLPsNotice";
-import HarvestLPsNoticeYAMYUSD from "./components/HarvestLPsNoticeYAMYUSD";
 import { useWallet } from "use-wallet";
 import FancyValue from "components/FancyValue";
 
@@ -35,8 +34,6 @@ const Farm: React.FC = () => {
     <Page>
       <PageHeader icon="🌾🍠" subtitle="Stake ESCH/UBQ Shinobi LP tokens and grow TGE1s" title="Farm" />
       <Container>
-        <HarvestLPsNoticeYAMYUSD />
-        <ResumedLPsNotice />
         {/* <PausedLPsNotice /> */}
         <Spacer />
         <Split>
@@ -55,7 +52,7 @@ const Farm: React.FC = () => {
           <Button
             full
             text="Get ESCH/UBQ LP tokens"
-            href="https://exchange.sushiswapclassic.org/#/add/0x0aacfbec6a24756c20d41914f2caba817c0d8521/ETH"
+            href="https://shinobi-info.ubiq.ninja/pair/0xf102ad140b26c3c6af9e9358da9deaa27cb1dbea"
             variant="tertiary"
           />
         </Split>
