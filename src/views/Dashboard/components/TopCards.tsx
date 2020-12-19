@@ -114,14 +114,14 @@ const TopCards: React.FC = () => {
     [
       {
         icon: "🧱",
-        label: "YAM total supply",
+        label: "TGE1 total supply",
         value: maxSupply ? maxSupply : "--",
         hint: "",
         tooltip: "",
       },
       {
-        icon: "🍠",
-        label: "YAM rebase impact",
+        icon: "🦖",
+        label: "TGE1 rebase impact",
         value: projectedRebase ? projectedRebase : "--",
         hint: projectedRebasePercent ? projectedRebasePercent : "-",
         tooltip: "",

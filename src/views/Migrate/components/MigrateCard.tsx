@@ -45,7 +45,7 @@ const MigrateCard: React.FC = () => {
   return (
     <Card>
       <CardIcon>
-        <span style={{ opacity: 0.5 }}>🍠</span>
+        <span style={{ opacity: 0.5 }}>🦖</span>
       </CardIcon>
       <CardContent>
         <Box alignItems="center" column>

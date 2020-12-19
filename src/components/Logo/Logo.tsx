@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <StyledEmoji>🍠</StyledEmoji>
+      <StyledEmoji>🦖</StyledEmoji>
       <StyledText>Ubiq TGE Framework</StyledText>
     </StyledLogo>
   );
