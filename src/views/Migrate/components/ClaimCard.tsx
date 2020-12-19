@@ -24,7 +24,7 @@ const ClaimCard: React.FC = () => {
       return <Button disabled full text="Claiming..." variant="secondary" />;
     }
     if (hasVestedYams) {
-      return <Button full onClick={onClaim} text="Claim YAMs" />;
+      return <Button full onClick={onClaim} text="Claim TGE1s" />;
     }
     return <Button disabled full text="Claim" variant="secondary" />;
   }, [isClaiming, onClaim, vestedBalance]);
@@ -35,7 +35,7 @@ const ClaimCard: React.FC = () => {
       <CardContent>
         <Box alignItems="center" column>
           <Value value={vestingBalanceDisplayValue} />
-          <Label text="Vested YAMs" />
+          <Label text="Vested TGE1s" />
         </Box>
       </CardContent>
       <CardActions>{ClaimButton}</CardActions>

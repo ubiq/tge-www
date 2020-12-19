@@ -671,7 +671,7 @@ const Charts: React.FC = () => {
       },
       yaxis: {
         title: {
-          // text: "YAMs Sold",
+          // text: "TGE1s Sold",
           style: {
             color: labelColor,
           },
@@ -782,7 +782,7 @@ const Charts: React.FC = () => {
       },
       yaxis: {
         title: {
-          // text: "YAMs Minted",
+          // text: "TGE1s Minted",
           style: {
             color: labelColor,
           },
