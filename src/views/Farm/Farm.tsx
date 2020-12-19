@@ -23,17 +23,17 @@ const Farm: React.FC = () => {
 
   const RedeemButton = useMemo(() => {
     if (status !== "connected") {
-      return <Button disabled text="Harvest &amp; Unstake YAM/ETH" variant="secondary" />;
+      return <Button disabled text="Harvest &amp; Unstake ESCH/UBQ" variant="secondary" />;
     }
     if (!isRedeeming) {
-      return <Button onClick={onRedeemYAMETH} text="Harvest &amp; Unstake YAM/ETH" variant="secondary" />;
+      return <Button onClick={onRedeemYAMETH} text="Harvest &amp; Unstake ESCH/UBQ" variant="secondary" />;
     }
     return <Button disabled text="Redeeming..." variant="secondary" />;
   }, [isRedeeming, onRedeemYAMETH]);
 
   return (
     <Page>
-      <PageHeader icon="🌾🍠" subtitle="Stake YAM/ETH Shinobi LP tokens and grow YAMs" title="Farm" />
+      <PageHeader icon="🌾🍠" subtitle="Stake ESCH/UBQ Shinobi LP tokens and grow YAMs" title="Farm" />
       <Container>
         <HarvestLPsNoticeYAMYUSD />
         <ResumedLPsNotice />
@@ -54,7 +54,7 @@ const Farm: React.FC = () => {
           <Button full text="Addresses" to="/addresses" variant="secondary" />
           <Button
             full
-            text="Get YAM/ETH LP tokens"
+            text="Get ESCH/UBQ LP tokens"
             href="https://exchange.sushiswapclassic.org/#/add/0x0aacfbec6a24756c20d41914f2caba817c0d8521/ETH"
             variant="tertiary"
           />

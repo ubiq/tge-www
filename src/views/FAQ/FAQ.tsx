@@ -44,7 +44,7 @@ const FAQ: React.FC = () => {
             <Question active={activeSlug === "rebase"} question="What is rebasing?" slug="rebase">
               <span>
                 Rebasing is a mechanism generally used to promote price stability by increasing the supply when the price is above the target price
-                and decrease supply when price is below the target. YAM is currently pegged to 1 USDC, and uses the YAM/ETH and ETH/USDC Shinobi
+                and decrease supply when price is below the target. YAM is currently pegged to 1 USDC, and uses the ESCH/UBQ and ETH/USDC Shinobi
                 pools to generate a two-hop TWAP (Time-Weighted Average Price) oracle to determine the necessary change in supply.
               </span>
               <span>If YAM price is above 1.05 USDC, YAM supply increases. This is known as a positive rebase.</span>
@@ -78,14 +78,14 @@ const FAQ: React.FC = () => {
             </Question>
             <Question active={activeSlug === "treasury"} question="How does YAM have a treasury?" slug="treasury">
               <span>
-                In the Yam protocol, when a positive rebase occurs, 5% of the YAM rebase amount is minted and sold for ETH via the YAM/ETH Shinobi
+                In the Yam protocol, when a positive rebase occurs, 5% of the YAM rebase amount is minted and sold for ETH via the ESCH/UBQ Shinobi
                 pool. The ETH is subsequently deposited to the governance-controlled treasury.
               </span>
             </Question>
             <Question active={activeSlug === "govlp"} question="Can LPs participate in governance?" slug="govlp">
               <span>
                 Only LPs that are staked in the Incentivizer contract can participate in governance. Voting power is determined by distributing the
-                voting power of YAM held in the YAM/ETH Shinobi pool, but distributed to only YAM Incentivizer stakers. This was done to mitigate
+                voting power of YAM held in the ESCH/UBQ Shinobi pool, but distributed to only YAM Incentivizer stakers. This was done to mitigate
                 flashloan threats in voting, so the Incentivizer contract keeps a record of the necessary values at needed block heights to facilitate
                 those mitigations.
               </span>
