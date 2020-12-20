@@ -17,7 +17,6 @@ import useLocalStorage from "hooks/useLocalStorage";
 import styled from "styled-components";
 
 import Farm from "views/Farm";
-import FAQ from "views/FAQ";
 import Home from "views/Home";
 import Migrate from "views/Migrate";
 import Addresses from "views/Addresses";
@@ -44,9 +43,6 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/farm">
             <Farm />
-          </Route>
-          <Route path="/faq">
-            <FAQ />
           </Route>
           <Route exact path="/migrate">
             <Migrate />
