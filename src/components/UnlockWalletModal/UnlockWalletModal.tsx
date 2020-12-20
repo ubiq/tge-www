@@ -17,17 +17,13 @@ const UnlockWalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
     connect("injected");
   }, [connect]);
 
-  const handleConnectSparrow = useCallback(() => {
-    connect("injected");
-  }, [connect]);
-  console.log(window.ethereum.isMetaMask)
   let injectedLogo = metamaskLogo;
   let injectedName = "Metamask";
 
   if (window.ethereum) {
     if (window.ethereum.isSparrow) {
       injectedLogo = sparrowLogo;
-      injectedName = "Sparrow"
+      injectedName = "Sparrow";
     }
   }
 
@@ -40,7 +36,6 @@ const UnlockWalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
     }
   }, [account, onDismiss]);
 
-  
   return (
     <Modal isOpen={isOpen}>
       <ModalTitle text="Select a wallet provider." />
