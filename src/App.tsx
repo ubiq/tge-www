@@ -18,7 +18,6 @@ import styled from "styled-components";
 
 import Farm from "views/Farm";
 import Home from "views/Home";
-import Migrate from "views/Migrate";
 import Addresses from "views/Addresses";
 
 const App: React.FC = () => {
@@ -43,9 +42,6 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/farm">
             <Farm />
-          </Route>
-          <Route exact path="/migrate">
-            <Migrate />
           </Route>
           <Route exact path="/addresses">
             <Addresses />
