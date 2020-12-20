@@ -21,7 +21,6 @@ import FAQ from "views/FAQ";
 import Home from "views/Home";
 import Migrate from "views/Migrate";
 import Addresses from "views/Addresses";
-import Umbrella from "views/Landings/Umbrella";
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -54,9 +53,6 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/addresses">
             <Addresses />
-          </Route>
-          <Route exact path="/umbrella">
-            <Umbrella />
           </Route>
           <StyledLink href="https://yam.gitbook.io/yam/" target="_blank">
             Docs
