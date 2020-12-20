@@ -67,10 +67,7 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ThemeProvider darkModeEnabled={darkModeSetting} darkTheme={darkTheme} lightTheme={lightTheme}>
       <UseWalletProvider
-        chainId={1}
-        connectors={{
-          walletconnect: { rpcUrl: "https://mainnet.eth.aragon.network/" },
-        }}
+        chainId={8}
       >
         <YamProvider>
           <PricesProvider>
