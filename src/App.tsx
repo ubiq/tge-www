@@ -20,7 +20,6 @@ import Farm from "views/Farm";
 import FAQ from "views/FAQ";
 import Home from "views/Home";
 import Migrate from "views/Migrate";
-import Dashboard from "views/Dashboard";
 import Addresses from "views/Addresses";
 import Umbrella from "views/Landings/Umbrella";
 
@@ -52,9 +51,6 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/migrate">
             <Migrate />
-          </Route>
-          <Route exact path="/dashboard">
-            <Dashboard />
           </Route>
           <Route exact path="/addresses">
             <Addresses />
