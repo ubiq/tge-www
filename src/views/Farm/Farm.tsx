@@ -1,24 +1,19 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
-import { Box, Button, Card, CardContent, Container, Separator, Spacer, useTheme } from "react-neu";
+import { Box, Button, Container, Separator, Spacer, useTheme } from "react-neu";
 
-import numeral from "numeral";
 import Page from "components/Page";
 import PageHeader from "components/PageHeader";
 import Split from "components/Split";
 import useFarming from "hooks/useFarming";
 import HarvestCard from "./components/Harvest";
 import StakeCard from "./components/Stake";
-import PausedLPsNotice from "./components/PausedLPsNotice";
-import ResumedLPsNotice from "./components/ResumedLPsNotice";
 import { useWallet } from "use-wallet";
-import FancyValue from "components/FancyValue";
 
 const Farm: React.FC = () => {
-  const { colors } = useTheme();
   const { status } = useWallet();
 
-  const { tvl, apr, isRedeeming, onRedeemYAMETH } = useFarming();
+  const { isRedeeming, onRedeemYAMETH } = useFarming();
 
   const RedeemButton = useMemo(() => {
     if (status !== "connected") {
