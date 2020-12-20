@@ -4,8 +4,11 @@ import styled from "styled-components";
 import { useWallet } from "use-wallet";
 
 import metamaskLogo from "assets/metamask-fox.svg";
+import sparrowLogo from "assets/sparrow.png";
 
 import WalletProviderCard from "./components/WalletProviderCard";
+
+declare const window: any;
 
 const UnlockWalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
   const { account, connector, connect } = useWallet();
@@ -14,6 +17,19 @@ const UnlockWalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
     connect("injected");
   }, [connect]);
 
+  const handleConnectSparrow = useCallback(() => {
+    connect("injected");
+  }, [connect]);
+  console.log(window.ethereum.isMetaMask)
+  let injectedLogo = metamaskLogo;
+  let injectedName = "Metamask";
+
+  if (window.ethereum) {
+    if (window.ethereum.isSparrow) {
+      injectedLogo = sparrowLogo;
+      injectedName = "Sparrow"
+    }
+  }
 
   useEffect(() => {
     if (account) {
@@ -24,13 +40,14 @@ const UnlockWalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
     }
   }, [account, onDismiss]);
 
+  
   return (
     <Modal isOpen={isOpen}>
       <ModalTitle text="Select a wallet provider." />
       <ModalContent>
         <StyledWalletsWrapper>
           <Box flex={1}>
-            <WalletProviderCard icon={<img src={metamaskLogo} style={{ height: 32 }} />} name="Metamask" onSelect={handleConnectMetamask} />
+            <WalletProviderCard icon={<img src={injectedLogo} style={{ height: 32 }} />} name={injectedName} onSelect={handleConnectMetamask} />
           </Box>
         </StyledWalletsWrapper>
       </ModalContent>
