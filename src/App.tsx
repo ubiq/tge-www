@@ -21,7 +21,6 @@ import FAQ from "views/FAQ";
 import Home from "views/Home";
 import Migrate from "views/Migrate";
 import Dashboard from "views/Dashboard";
-import Governance from "views/Governance";
 import Addresses from "views/Addresses";
 import Umbrella from "views/Landings/Umbrella";
 
@@ -56,9 +55,6 @@ const App: React.FC = () => {
           </Route>
           <Route exact path="/dashboard">
             <Dashboard />
-          </Route>
-          <Route exact path="/governance">
-            <Governance />
           </Route>
           <Route exact path="/addresses">
             <Addresses />
