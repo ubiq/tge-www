@@ -30,7 +30,7 @@ const AddressButton: React.FC<AddressButtonProps> = ({ name, address, to, uniswa
           >
             <StyledUniswapButton darkMode={darkMode}>
               <StyledSpan>
-                <span>{unitext ? unitext : "Buy at Uniswap"}</span>
+                <span>{unitext ? unitext : "Buy at Shinobi"}</span>
               </StyledSpan>
             </StyledUniswapButton>
           </StyledLink>

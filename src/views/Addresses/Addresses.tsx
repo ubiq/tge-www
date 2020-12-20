@@ -4,12 +4,10 @@ import { Container } from "react-neu";
 import Page from "components/Page";
 import PageHeader from "components/PageHeader";
 import {
-  DPI,
   ContractIncentivizer,
   ContractTimelock,
   ESCH,
   yamv3,
-  yUsd,
 } from "constants/tokenAddresses";
 import AddressButton from "components/AddressButton";
 

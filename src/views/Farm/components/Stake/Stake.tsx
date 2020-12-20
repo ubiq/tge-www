@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import Countdown, { CountdownRenderProps } from "react-countdown";
-import numeral from "numeral";
 import { Box, Button, Card, CardActions, CardContent, CardIcon } from "react-neu";
 import { useWallet } from "use-wallet";
 
@@ -14,7 +13,6 @@ import { bnToDec, getFullDisplayBalance } from "utils";
 
 import StakeModal from "./components/StakeModal";
 import UnstakeModal from "./components/UnstakeModal";
-import BigNumber from "bignumber.js";
 
 const Stake: React.FC = () => {
   const [stakeModalIsOpen, setStakeModalIsOpen] = useState(false);
@@ -32,7 +30,6 @@ const Stake: React.FC = () => {
     onApprove,
     onStakeYAMETH,
     onUnstakeYAMETH,
-    stakedBalanceYAMYUSD,
     stakedBalanceYAMETH,
   } = useFarming();
 
