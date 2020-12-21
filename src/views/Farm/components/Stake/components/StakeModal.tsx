@@ -13,11 +13,11 @@ interface StakeModalProps extends ModalProps {
 
 const StakeModal: React.FC<StakeModalProps> = ({ isOpen, onDismiss, onStake }) => {
   const [val, setVal] = useState("");
-  const { YAMETHLPBalance } = useBalances();
+  const { ESCHUBQLPBalance } = useBalances();
 
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(YAMETHLPBalance || new BigNumber(0), 0);
-  }, [YAMETHLPBalance]);
+    return getFullDisplayBalance(ESCHUBQLPBalance || new BigNumber(0), 0);
+  }, [ESCHUBQLPBalance]);
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {

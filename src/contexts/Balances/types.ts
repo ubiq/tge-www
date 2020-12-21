@@ -4,5 +4,5 @@ export interface ContextValues {
   yamV2Balance?: BigNumber;
   yamV3Balance?: BigNumber;
   yycrvUniLpBalance?: BigNumber;
-  YAMETHLPBalance?: BigNumber;
+  ESCHUBQLPBalance?: BigNumber;
 }

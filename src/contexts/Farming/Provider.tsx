@@ -35,8 +35,8 @@ const Provider: React.FC = ({ children }) => {
   // const { isApproved, isApproving, onApprove } = useApproval(yycrvUniLpAddress, yycrvPoolAddress, () =>
   //   setConfirmTxModalIsOpen(false)
   // );
-  const YAMETHPoolAddress = yam ? yam.contracts.voting_eth_pool.options.address : "";
-  const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, YAMETHPoolAddress, () => setConfirmTxModalIsOpen(false));
+  const ESCHUBQPoolAddress = yam ? yam.contracts.voting_eth_pool.options.address : "";
+  const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, ESCHUBQPoolAddress, () => setConfirmTxModalIsOpen(false));
 
   const fetchEarnedBalanceYAMYUSD = useCallback(async () => {
     if (!account || !yam) return;
@@ -120,7 +120,7 @@ const Provider: React.FC = ({ children }) => {
     [account, setConfirmTxModalIsOpen, setIsUnstaking, yam]
   );
 
-  const handleHarvestYAMETH = useCallback(async () => {
+  const handleHarvestESCHUBQ = useCallback(async () => {
     if (!yam) return;
     setConfirmTxModalIsOpen(true);
     await harvest(yam, account, yam.contracts.voting_eth_pool, () => {
@@ -130,7 +130,7 @@ const Provider: React.FC = ({ children }) => {
     setIsHarvesting(false);
   }, [account, setConfirmTxModalIsOpen, setIsHarvesting, yam]);
 
-  const handleRedeemYAMETH = useCallback(async () => {
+  const handleRedeemESCHUBQ = useCallback(async () => {
     if (!yam) return;
     setConfirmTxModalIsOpen(true);
     await redeem(yam, account, yam.contracts.voting_eth_pool, () => {
@@ -140,7 +140,7 @@ const Provider: React.FC = ({ children }) => {
     setIsRedeeming(false);
   }, [account, setConfirmTxModalIsOpen, setIsRedeeming, yam]);
 
-  const handleStakeYAMETH = useCallback(
+  const handleStakeESCHUBQ = useCallback(
     async (amount: string) => {
       if (!yam) return;
       setConfirmTxModalIsOpen(true);
@@ -153,7 +153,7 @@ const Provider: React.FC = ({ children }) => {
     [account, setConfirmTxModalIsOpen, setIsStaking, yam]
   );
 
-  const handleUnstakeYAMETH = useCallback(
+  const handleUnstakeESCHUBQ = useCallback(
     async (amount: string) => {
       if (!yam) return;
       setConfirmTxModalIsOpen(true);
@@ -223,10 +223,10 @@ const Provider: React.FC = ({ children }) => {
         onRedeemYAMYUSD: handleRedeemYAMYUSD,
         onStakeYAMYUSD: handleStakeYAMYUSD,
         onUnstakeYAMYUSD: handleUnstakeYAMYUSD,
-        onHarvestESCHUBQ: handleHarvestYAMETH,
-        onRedeemESCHUBQ: handleRedeemYAMETH,
-        onStakeESCHUBQ: handleStakeYAMETH,
-        onUnstakeESCHUBQ: handleUnstakeYAMETH,
+        onHarvestESCHUBQ: handleHarvestESCHUBQ,
+        onRedeemESCHUBQ: handleRedeemESCHUBQ,
+        onStakeESCHUBQ: handleStakeESCHUBQ,
+        onUnstakeESCHUBQ: handleUnstakeESCHUBQ,
         earnedBalanceYAMYUSD,
         stakedBalanceYAMYUSD,
         earnedBalanceESCHUBQ,

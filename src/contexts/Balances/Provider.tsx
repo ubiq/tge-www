@@ -12,7 +12,7 @@ const Provider: React.FC = ({ children }) => {
   const [yamV2Balance, setYamV2Balance] = useState<BigNumber>();
   const [yamV3Balance, setYamV3Balance] = useState<BigNumber>();
   const [yycrvUniLpBalance, setYycrvUniLpBalance] = useState<BigNumber>();
-  const [YAMETHLPBalance, setYAMETHLPBalance] = useState<BigNumber>();
+  const [ESCHUBQLPBalance, setESCHUBQLPBalance] = useState<BigNumber>();
 
   const { account, ethereum }: { account: string | null; ethereum: provider } = useWallet();
 
@@ -27,9 +27,9 @@ const Provider: React.FC = ({ children }) => {
       setYamV2Balance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(24)));
       setYamV3Balance(new BigNumber(balances[1]).dividedBy(new BigNumber(10).pow(18)));
       setYycrvUniLpBalance(new BigNumber(balances[2]).dividedBy(new BigNumber(10).pow(18)));
-      setYAMETHLPBalance(new BigNumber(balances[3]).dividedBy(new BigNumber(10).pow(18)));
+      setESCHUBQLPBalance(new BigNumber(balances[3]).dividedBy(new BigNumber(10).pow(18)));
     },
-    [setYamV2Balance, setYamV3Balance, setYycrvUniLpBalance, setYAMETHLPBalance]
+    [setYamV2Balance, setYamV3Balance, setYycrvUniLpBalance, setESCHUBQLPBalance]
   );
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const Provider: React.FC = ({ children }) => {
         yamV2Balance,
         yamV3Balance,
         yycrvUniLpBalance,
-        YAMETHLPBalance,
+        ESCHUBQLPBalance,
       }}
     >
       {children}
