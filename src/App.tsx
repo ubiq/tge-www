@@ -10,7 +10,6 @@ import { BalancesProvider } from "contexts/Balances";
 import { FarmingProvider } from "contexts/Farming";
 import { PricesProvider } from "contexts/Prices";
 import { VestingProvider } from "contexts/Vesting";
-import { GovernanceProvider } from "contexts/Governance";
 import YamProvider from "contexts/YamProvider";
 import useLocalStorage from "hooks/useLocalStorage";
 import styled from "styled-components";
@@ -73,7 +72,7 @@ const Providers: React.FC = ({ children }) => {
             <BalancesProvider>
               <FarmingProvider>
                   <VestingProvider>
-                    <GovernanceProvider>{children}</GovernanceProvider>
+                    {children}
                   </VestingProvider>
               </FarmingProvider>
             </BalancesProvider>
