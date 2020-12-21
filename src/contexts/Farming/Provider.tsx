@@ -24,8 +24,6 @@ const Provider: React.FC = ({ children }) => {
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [isStaking, setIsStaking] = useState(false);
   const [isUnstaking, setIsUnstaking] = useState(false);
-  const [earnedBalanceYAMYUSD, setEarnedBalanceYAMYUSD] = useState<BigNumber>();
-  const [stakedBalanceYAMYUSD, setStakedBalanceYAMYUSD] = useState<BigNumber>();
   const [earnedBalanceESCHUBQ, setearnedBalanceESCHUBQ] = useState<BigNumber>();
   const [stakedBalanceESCHUBQ, setstakedBalanceESCHUBQ] = useState<BigNumber>();
   const yam = useYam();
@@ -37,18 +35,6 @@ const Provider: React.FC = ({ children }) => {
   // );
   const ESCHUBQPoolAddress = yam ? yam.contracts.voting_eth_pool.options.address : "";
   const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, ESCHUBQPoolAddress, () => setConfirmTxModalIsOpen(false));
-
-  const fetchEarnedBalanceYAMYUSD = useCallback(async () => {
-    if (!account || !yam) return;
-    const balance = await getEarned(yam, yam.contracts.yycrv_pool, account);
-    setEarnedBalanceYAMYUSD(balance);
-  }, [account, setEarnedBalanceYAMYUSD, yam]);
-
-  const fetchStakedBalanceYAMYUSD = useCallback(async () => {
-    if (!account || !yam) return;
-    const balance = await getStaked(yam, yam.contracts.yycrv_pool, account);
-    setStakedBalanceYAMYUSD(balance);
-  }, [account, setStakedBalanceYAMYUSD, yam]);
 
   const fetchearnedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
@@ -63,62 +49,14 @@ const Provider: React.FC = ({ children }) => {
   }, [account, setstakedBalanceESCHUBQ, yam]);
 
   const fetchBalances = useCallback(async () => {
-    fetchEarnedBalanceYAMYUSD();
-    fetchStakedBalanceYAMYUSD();
     fetchearnedBalanceESCHUBQ();
     fetchstakedBalanceESCHUBQ();
-  }, [fetchEarnedBalanceYAMYUSD, fetchStakedBalanceYAMYUSD, fetchearnedBalanceESCHUBQ, fetchstakedBalanceESCHUBQ]);
+  }, [fetchearnedBalanceESCHUBQ, fetchstakedBalanceESCHUBQ]);
 
   const handleApprove = useCallback(() => {
     setConfirmTxModalIsOpen(true);
     onApprove();
   }, [onApprove, setConfirmTxModalIsOpen]);
-
-  const handleHarvestYAMYUSD = useCallback(async () => {
-    if (!yam) return;
-    setConfirmTxModalIsOpen(true);
-    await harvest(yam, account, yam.contracts.yycrv_pool, () => {
-      setConfirmTxModalIsOpen(false);
-      setIsHarvesting(true);
-    });
-    setIsHarvesting(false);
-  }, [account, setConfirmTxModalIsOpen, setIsHarvesting, yam]);
-
-  const handleRedeemYAMYUSD = useCallback(async () => {
-    if (!yam) return;
-    setConfirmTxModalIsOpen(true);
-    await redeem(yam, account, yam.contracts.yycrv_pool, () => {
-      setConfirmTxModalIsOpen(false);
-      setIsRedeeming(true);
-    });
-    setIsRedeeming(false);
-  }, [account, setConfirmTxModalIsOpen, setIsRedeeming, yam]);
-
-  const handleStakeYAMYUSD = useCallback(
-    async (amount: string) => {
-      if (!yam) return;
-      setConfirmTxModalIsOpen(true);
-      await stake(yam, amount, account, yam.contracts.yycrv_pool, () => {
-        setConfirmTxModalIsOpen(false);
-        setIsStaking(true);
-      });
-      setIsStaking(false);
-    },
-    [account, setConfirmTxModalIsOpen, setIsStaking, yam]
-  );
-
-  const handleUnstakeYAMYUSD = useCallback(
-    async (amount: string) => {
-      if (!yam) return;
-      setConfirmTxModalIsOpen(true);
-      await unstake(yam, amount, account, yam.contracts.yycrv_pool, () => {
-        setConfirmTxModalIsOpen(false);
-        setIsUnstaking(true);
-      });
-      setIsUnstaking(false);
-    },
-    [account, setConfirmTxModalIsOpen, setIsUnstaking, yam]
-  );
 
   const handleHarvestESCHUBQ = useCallback(async () => {
     if (!yam) return;
@@ -219,16 +157,10 @@ const Provider: React.FC = ({ children }) => {
         isStaking,
         isUnstaking,
         onApprove: handleApprove,
-        onHarvestYAMYUSD: handleHarvestYAMYUSD,
-        onRedeemYAMYUSD: handleRedeemYAMYUSD,
-        onStakeYAMYUSD: handleStakeYAMYUSD,
-        onUnstakeYAMYUSD: handleUnstakeYAMYUSD,
         onHarvestESCHUBQ: handleHarvestESCHUBQ,
         onRedeemESCHUBQ: handleRedeemESCHUBQ,
         onStakeESCHUBQ: handleStakeESCHUBQ,
         onUnstakeESCHUBQ: handleUnstakeESCHUBQ,
-        earnedBalanceYAMYUSD,
-        stakedBalanceYAMYUSD,
         earnedBalanceESCHUBQ,
         stakedBalanceESCHUBQ,
       }}
