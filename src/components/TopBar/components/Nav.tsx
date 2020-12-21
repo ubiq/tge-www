@@ -31,15 +31,4 @@ const StyledRouterLink = styled(NavLink)`
   }
 `;
 
-const StyledLink = styled.a`
-  color: ${(props) => props.theme.colors.grey[500]};
-  padding-left: ${(props) => props.theme.spacing[3]}px;
-  padding-right: ${(props) => props.theme.spacing[3]}px;
-  text-decoration: none;
-  font-weight: bold;
-  &:hover {
-    color: ${(props) => props.theme.colors.grey[600]};
-  }
-`;
-
 export default Nav;

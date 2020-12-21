@@ -29,10 +29,6 @@ const Provider: React.FC = ({ children }) => {
   const yam = useYam();
   const { account } = useWallet();
 
-  // const yycrvPoolAddress = yam ? yam.contracts.yycrv_pool.options.address : ''
-  // const { isApproved, isApproving, onApprove } = useApproval(yycrvUniLpAddress, yycrvPoolAddress, () =>
-  //   setConfirmTxModalIsOpen(false)
-  // );
   const ESCHUBQPoolAddress = yam ? yam.contracts.voting_eth_pool.options.address : "";
   const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, ESCHUBQPoolAddress, () => setConfirmTxModalIsOpen(false));
 

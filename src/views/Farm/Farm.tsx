@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { Box, Button, Container, Separator, Spacer, useTheme } from "react-neu";
+import { Box, Button, Container, Separator, Spacer } from "react-neu";
 
 import Page from "components/Page";
 import PageHeader from "components/PageHeader";

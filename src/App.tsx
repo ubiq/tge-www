@@ -8,7 +8,6 @@ import TopBar from "components/TopBar";
 
 import { BalancesProvider } from "contexts/Balances";
 import { FarmingProvider } from "contexts/Farming";
-import { MigrationProvider } from "contexts/Migration";
 import { PricesProvider } from "contexts/Prices";
 import { VestingProvider } from "contexts/Vesting";
 import { GovernanceProvider } from "contexts/Governance";
@@ -73,11 +72,9 @@ const Providers: React.FC = ({ children }) => {
           <PricesProvider>
             <BalancesProvider>
               <FarmingProvider>
-                <MigrationProvider>
                   <VestingProvider>
                     <GovernanceProvider>{children}</GovernanceProvider>
                   </VestingProvider>
-                </MigrationProvider>
               </FarmingProvider>
             </BalancesProvider>
           </PricesProvider>

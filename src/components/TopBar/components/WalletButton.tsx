@@ -6,11 +6,10 @@ import { useWallet } from "use-wallet";
 
 import UnlockWalletModal from "components/UnlockWalletModal";
 import WalletModal from "components/WalletModal";
-import { sleep } from "utils";
 
 interface WalletButtonProps {}
 
-const WalletButton: React.FC<WalletButtonProps> = (props) => {
+const WalletButton: React.FC<WalletButtonProps> = () => {
   const [walletModalIsOpen, setWalletModalIsOpen] = useState(false);
   const [unlockModalIsOpen, setUnlockModalIsOpen] = useState(false);
   const [userAccount, setUserAccount] = useState<string | null>();

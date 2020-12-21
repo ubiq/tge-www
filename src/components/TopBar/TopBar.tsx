@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container, Spacer, useTheme } from "react-neu";
+import { Container, Spacer } from "react-neu";
 import styled from "styled-components";
 
 import Logo from "components/Logo";
