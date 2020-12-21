@@ -13,17 +13,17 @@ import { useWallet } from "use-wallet";
 const Farm: React.FC = () => {
   const { status } = useWallet();
 
-  const { isRedeeming, onRedeemYAMETH } = useFarming();
+  const { isRedeeming, onRedeemESCHUBQ } = useFarming();
 
   const RedeemButton = useMemo(() => {
     if (status !== "connected") {
       return <Button disabled text="Harvest &amp; Unstake ESCH/UBQ" variant="secondary" />;
     }
     if (!isRedeeming) {
-      return <Button onClick={onRedeemYAMETH} text="Harvest &amp; Unstake ESCH/UBQ" variant="secondary" />;
+      return <Button onClick={onRedeemESCHUBQ} text="Harvest &amp; Unstake ESCH/UBQ" variant="secondary" />;
     }
     return <Button disabled text="Redeeming..." variant="secondary" />;
-  }, [isRedeeming, onRedeemYAMETH]);
+  }, [isRedeeming, onRedeemESCHUBQ]);
 
   return (
     <Page>

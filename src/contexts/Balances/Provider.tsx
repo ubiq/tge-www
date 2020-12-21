@@ -3,7 +3,7 @@ import BigNumber from "bignumber.js";
 import { useWallet } from "use-wallet";
 import { provider } from "web3-core";
 
-import { yamv2 as yamV2Address, yamv3 as yamV3Address, yycrvUniLp as yyrcvUniLpAddress, YAMETHSLPAddress } from "constants/tokenAddresses";
+import { yamv2 as yamV2Address, yamv3 as yamV3Address, yycrvUniLp as yyrcvUniLpAddress, ESCHUBQSLPAddress } from "constants/tokenAddresses";
 import { getBalance } from "utils";
 
 import Context from "./Context";
@@ -22,7 +22,7 @@ const Provider: React.FC = ({ children }) => {
         await getBalance(provider, yamV2Address, userAddress),
         await getBalance(provider, yamV3Address, userAddress),
         await getBalance(provider, yyrcvUniLpAddress, userAddress),
-        await getBalance(provider, YAMETHSLPAddress, userAddress),
+        await getBalance(provider, ESCHUBQSLPAddress, userAddress),
       ]);
       setYamV2Balance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(24)));
       setYamV3Balance(new BigNumber(balances[1]).dividedBy(new BigNumber(10).pow(18)));

@@ -9,10 +9,10 @@ const Context = createContext<ContextValues>({
   onRedeemYAMYUSD: () => {},
   onStakeYAMYUSD: () => {},
   onUnstakeYAMYUSD: () => {},
-  onHarvestYAMETH: () => {},
-  onRedeemYAMETH: () => {},
-  onStakeYAMETH: () => {},
-  onUnstakeYAMETH: () => {},
+  onHarvestESCHUBQ: () => {},
+  onRedeemESCHUBQ: () => {},
+  onStakeESCHUBQ: () => {},
+  onUnstakeESCHUBQ: () => {},
 });
 
 export default Context;

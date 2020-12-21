@@ -4,7 +4,7 @@ import BigNumber from "bignumber.js";
 import { useWallet } from "use-wallet";
 
 import ConfirmTransactionModal from "components/ConfirmTransactionModal";
-import { YAMETHSLPAddress, yycrvUniLp as yycrvUniLpAddress } from "constants/tokenAddresses";
+import { ESCHUBQSLPAddress } from "constants/tokenAddresses";
 import useApproval from "hooks/useApproval";
 import useYam from "hooks/useYam";
 
@@ -26,8 +26,8 @@ const Provider: React.FC = ({ children }) => {
   const [isUnstaking, setIsUnstaking] = useState(false);
   const [earnedBalanceYAMYUSD, setEarnedBalanceYAMYUSD] = useState<BigNumber>();
   const [stakedBalanceYAMYUSD, setStakedBalanceYAMYUSD] = useState<BigNumber>();
-  const [earnedBalanceYAMETH, setEarnedBalanceYAMETH] = useState<BigNumber>();
-  const [stakedBalanceYAMETH, setStakedBalanceYAMETH] = useState<BigNumber>();
+  const [earnedBalanceESCHUBQ, setearnedBalanceESCHUBQ] = useState<BigNumber>();
+  const [stakedBalanceESCHUBQ, setstakedBalanceESCHUBQ] = useState<BigNumber>();
   const yam = useYam();
   const { account } = useWallet();
 
@@ -36,7 +36,7 @@ const Provider: React.FC = ({ children }) => {
   //   setConfirmTxModalIsOpen(false)
   // );
   const YAMETHPoolAddress = yam ? yam.contracts.voting_eth_pool.options.address : "";
-  const { isApproved, isApproving, onApprove } = useApproval(YAMETHSLPAddress, YAMETHPoolAddress, () => setConfirmTxModalIsOpen(false));
+  const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, YAMETHPoolAddress, () => setConfirmTxModalIsOpen(false));
 
   const fetchEarnedBalanceYAMYUSD = useCallback(async () => {
     if (!account || !yam) return;
@@ -50,24 +50,24 @@ const Provider: React.FC = ({ children }) => {
     setStakedBalanceYAMYUSD(balance);
   }, [account, setStakedBalanceYAMYUSD, yam]);
 
-  const fetchEarnedBalanceYAMETH = useCallback(async () => {
+  const fetchearnedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
     const balance = await getEarned(yam, yam.contracts.voting_eth_pool, account);
-    setEarnedBalanceYAMETH(balance);
-  }, [account, setEarnedBalanceYAMETH, yam]);
+    setearnedBalanceESCHUBQ(balance);
+  }, [account, setearnedBalanceESCHUBQ, yam]);
 
-  const fetchStakedBalanceYAMETH = useCallback(async () => {
+  const fetchstakedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
     const balance = await getStaked(yam, yam.contracts.voting_eth_pool, account);
-    setStakedBalanceYAMETH(balance);
-  }, [account, setStakedBalanceYAMETH, yam]);
+    setstakedBalanceESCHUBQ(balance);
+  }, [account, setstakedBalanceESCHUBQ, yam]);
 
   const fetchBalances = useCallback(async () => {
     fetchEarnedBalanceYAMYUSD();
     fetchStakedBalanceYAMYUSD();
-    fetchEarnedBalanceYAMETH();
-    fetchStakedBalanceYAMETH();
-  }, [fetchEarnedBalanceYAMYUSD, fetchStakedBalanceYAMYUSD, fetchEarnedBalanceYAMETH, fetchStakedBalanceYAMETH]);
+    fetchearnedBalanceESCHUBQ();
+    fetchstakedBalanceESCHUBQ();
+  }, [fetchEarnedBalanceYAMYUSD, fetchStakedBalanceYAMYUSD, fetchearnedBalanceESCHUBQ, fetchstakedBalanceESCHUBQ]);
 
   const handleApprove = useCallback(() => {
     setConfirmTxModalIsOpen(true);
@@ -223,14 +223,14 @@ const Provider: React.FC = ({ children }) => {
         onRedeemYAMYUSD: handleRedeemYAMYUSD,
         onStakeYAMYUSD: handleStakeYAMYUSD,
         onUnstakeYAMYUSD: handleUnstakeYAMYUSD,
-        onHarvestYAMETH: handleHarvestYAMETH,
-        onRedeemYAMETH: handleRedeemYAMETH,
-        onStakeYAMETH: handleStakeYAMETH,
-        onUnstakeYAMETH: handleUnstakeYAMETH,
+        onHarvestESCHUBQ: handleHarvestYAMETH,
+        onRedeemESCHUBQ: handleRedeemYAMETH,
+        onStakeESCHUBQ: handleStakeYAMETH,
+        onUnstakeESCHUBQ: handleUnstakeYAMETH,
         earnedBalanceYAMYUSD,
         stakedBalanceYAMYUSD,
-        earnedBalanceYAMETH,
-        stakedBalanceYAMETH,
+        earnedBalanceESCHUBQ,
+        stakedBalanceESCHUBQ,
       }}
     >
       {children}

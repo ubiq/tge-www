@@ -28,9 +28,9 @@ const Stake: React.FC = () => {
     isStaking,
     isUnstaking,
     onApprove,
-    onStakeYAMETH,
-    onUnstakeYAMETH,
-    stakedBalanceYAMETH,
+    onStakeESCHUBQ,
+    onUnstakeESCHUBQ,
+    stakedBalanceESCHUBQ,
   } = useFarming();
 
   const handleDismissStakeModal = useCallback(() => {
@@ -43,18 +43,18 @@ const Stake: React.FC = () => {
 
   const handleOnStake = useCallback(
     (amount: string) => {
-      onStakeYAMETH(amount);
+      onStakeESCHUBQ(amount);
       handleDismissStakeModal();
     },
-    [handleDismissStakeModal, onStakeYAMETH]
+    [handleDismissStakeModal, onStakeESCHUBQ]
   );
 
   const handleOnUnstake = useCallback(
     (amount: string) => {
-      onUnstakeYAMETH(amount);
+      onUnstakeESCHUBQ(amount);
       handleDismissUnstakeModal();
     },
-    [handleDismissUnstakeModal, onUnstakeYAMETH]
+    [handleDismissUnstakeModal, onUnstakeESCHUBQ]
   );
 
   const handleStakeClick = useCallback(() => {
@@ -89,7 +89,7 @@ const Stake: React.FC = () => {
   }, [countdown, handleStakeClick, isApproving, onApprove, status]);
 
   const UnstakeButton = useMemo(() => {
-    const hasStaked = stakedBalanceYAMETH && stakedBalanceYAMETH.toNumber() > 0;
+    const hasStaked = stakedBalanceESCHUBQ && stakedBalanceESCHUBQ.toNumber() > 0;
     if (status !== "connected" || !hasStaked) {
       return <Button disabled full text="Unstake" variant="secondary" />;
     }
@@ -100,12 +100,12 @@ const Stake: React.FC = () => {
   }, [handleUnstakeClick, isApproving, onApprove, status]);
 
   const formattedStakedBalance = useCallback(async () => {
-    if (stakedBalanceYAMETH && bnToDec(stakedBalanceYAMETH) > 0) {
-      setStakeBalance(Number(getFullDisplayBalance(stakedBalanceYAMETH)));
+    if (stakedBalanceESCHUBQ && bnToDec(stakedBalanceESCHUBQ) > 0) {
+      setStakeBalance(Number(getFullDisplayBalance(stakedBalanceESCHUBQ)));
     } else {
       setStakeBalance(0);
     }
-  }, [stakedBalanceYAMETH]);
+  }, [stakedBalanceESCHUBQ]);
 
   useEffect(() => {
     formattedStakedBalance();

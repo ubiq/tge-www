@@ -14,11 +14,11 @@ interface UnstakeModalProps extends ModalProps {
 
 const UnstakeModal: React.FC<UnstakeModalProps> = ({ isOpen, onDismiss, onUnstake }) => {
   const [val, setVal] = useState("");
-  const { stakedBalanceYAMETH } = useFarming();
+  const { stakedBalanceESCHUBQ } = useFarming();
 
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(stakedBalanceYAMETH || new BigNumber(0));
-  }, [stakedBalanceYAMETH]);
+    return getFullDisplayBalance(stakedBalanceESCHUBQ || new BigNumber(0));
+  }, [stakedBalanceESCHUBQ]);
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {

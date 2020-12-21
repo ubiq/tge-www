@@ -17,12 +17,12 @@ export interface ContextValues {
   onRedeemYAMYUSD: () => void;
   onStakeYAMYUSD: (amount: string) => void;
   onUnstakeYAMYUSD: (amount: string) => void;
-  onHarvestYAMETH: () => void;
-  onRedeemYAMETH: () => void;
-  onStakeYAMETH: (amount: string) => void;
-  onUnstakeYAMETH: (amount: string) => void;
+  onHarvestESCHUBQ: () => void;
+  onRedeemESCHUBQ: () => void;
+  onStakeESCHUBQ: (amount: string) => void;
+  onUnstakeESCHUBQ: (amount: string) => void;
   earnedBalanceYAMYUSD?: BigNumber;
   stakedBalanceYAMYUSD?: BigNumber;
-  earnedBalanceYAMETH?: BigNumber;
-  stakedBalanceYAMETH?: BigNumber;
+  earnedBalanceESCHUBQ?: BigNumber;
+  stakedBalanceESCHUBQ?: BigNumber;
 }
