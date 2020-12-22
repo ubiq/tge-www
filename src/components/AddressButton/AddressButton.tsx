@@ -23,7 +23,7 @@ const AddressButton: React.FC<AddressButtonProps> = ({ name, address, uniswap, u
           <Spacer />
           <StyledLink
             darkMode={darkMode}
-            href={unilink ? unilink + address : "https://uniswap.exchange/swap?inputCurrency=" + address}
+            href={unilink ? unilink + address : "https://shinobi.ubiq.ninja/swap?inputCurrency=" + address}
             target="_blank"
             color="white"
             overflow={true}

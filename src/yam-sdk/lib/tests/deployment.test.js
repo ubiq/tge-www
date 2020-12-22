@@ -1,7 +1,4 @@
 import { Yam } from "../index.js";
-import * as Types from "../lib/types.js";
-import { addressMap } from "../lib/constants.js";
-import { decimalToString, stringToDecimal } from "../lib/Helpers.js";
 
 export const yam = new Yam(
   "http://localhost:8545/",
@@ -19,7 +16,6 @@ export const yam = new Yam(
     ethereumNodeTimeout: 10000,
   }
 );
-const oneEther = 10 ** 18;
 
 describe("post-deployment", () => {
   let snapshotId;
@@ -47,98 +43,6 @@ describe("post-deployment", () => {
       );
     });
 
-    test("pool balances", async () => {
-      let ycrv_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.ycrv_pool.options.address).call();
-
-      expect(ycrv_balance).toBe(
-        yam
-          .toBigN(1500000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let yfi_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.yfi_pool.options.address).call();
-
-      expect(yfi_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let ampl_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.ampl_pool.options.address).call();
-
-      expect(ampl_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let eth_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.eth_pool.options.address).call();
-
-      expect(eth_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let snx_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.snx_pool.options.address).call();
-
-      expect(snx_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let comp_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.comp_pool.options.address).call();
-
-      expect(comp_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let lend_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.lend_pool.options.address).call();
-
-      expect(lend_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let link_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.link_pool.options.address).call();
-
-      expect(link_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-
-      let mkr_balance = await yam.contracts.yam.methods.balanceOf(yam.contracts.mkr_pool.options.address).call();
-
-      expect(mkr_balance).toBe(
-        yam
-          .toBigN(250000)
-          .times(yam.toBigN(10 ** 18))
-          .times(yam.toBigN(1))
-          .toString()
-      );
-    });
-
     test("total supply", async () => {
       let ts = await yam.contracts.yam.methods.totalSupply().call();
       expect(ts).toBe("10500000000000000000000000");
@@ -156,29 +60,9 @@ describe("post-deployment", () => {
       expect(gov).toBe(yam.contracts.timelock.options.address);
     });
 
-    test("rebaser gov", async () => {
-      let gov = await yam.contracts.rebaser.methods.gov().call();
-      expect(gov).toBe(yam.contracts.timelock.options.address);
-    });
-
     test("reserves gov", async () => {
       let gov = await yam.contracts.reserves.methods.gov().call();
       expect(gov).toBe(yam.contracts.timelock.options.address);
-    });
-
-    test("timelock admin", async () => {
-      let gov = await yam.contracts.timelock.methods.admin().call();
-      expect(gov).toBe(yam.contracts.gov.options.address);
-    });
-
-    test("gov timelock", async () => {
-      let tl = await yam.contracts.gov.methods.timelock().call();
-      expect(tl).toBe(yam.contracts.timelock.options.address);
-    });
-
-    test("gov guardian", async () => {
-      let grd = await yam.contracts.gov.methods.guardian().call();
-      expect(grd).toBe("0x0000000000000000000000000000000000000000");
     });
 
     test("pool owner", async () => {
@@ -197,10 +81,4 @@ describe("post-deployment", () => {
     });
   });
 
-  describe("timelock delay initiated", () => {
-    test("timelock delay initiated", async () => {
-      let inited = await yam.contracts.timelock.methods.admin_initialized().call();
-      expect(inited).toBe(true);
-    });
-  });
 });
