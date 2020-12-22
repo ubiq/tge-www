@@ -1,5 +1,3 @@
-import * as Types from "./types.js";
-
 export class Account {
   constructor(contracts, address) {
     this.contracts = contracts;

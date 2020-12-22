@@ -1,5 +1,4 @@
 import BigNumber from "bignumber.js/bignumber";
-import Web3 from "web3";
 import * as Types from "./types.js";
 import { SUBTRACT_GAS_LIMIT, addressMap } from "./constants.js";
 
@@ -21,7 +20,6 @@ import DualGovJson from "../clean_build/contracts/DualGovernorAlpha.json";
 
 import YAMTimelockJson from "../clean_build/contracts/Timelock.json";
 import WETHJson from "./weth.json";
-import SNXJson from "./snx.json";
 import UNIFactJson from "./unifact2.json";
 import UNIPairJson from "./uni2.json";
 import UNIRouterJson from "./uniR.json";

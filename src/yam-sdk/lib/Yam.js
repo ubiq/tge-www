@@ -4,8 +4,6 @@ import { Contracts } from "./lib/contracts.js";
 import { Account } from "./lib/accounts.js";
 import { EVM } from "./lib/evm.js";
 
-const oneEther = 1000000000000000000;
-
 export class Yam {
   constructor(provider, networkId, testing, options) {
     var realProvider;

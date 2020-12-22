@@ -1,8 +1,8 @@
-import React, { useContext, useMemo } from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import copy from "assets/copy.svg";
 import confirm from "assets/copy_confirm.svg";
-import { Box, Container, Spacer, useTheme } from "react-neu";
+import { Box, Spacer, useTheme } from "react-neu";
 
 interface AddressButtonProps {
   name?: string;
@@ -13,7 +13,7 @@ interface AddressButtonProps {
   to?: string;
 }
 
-const AddressButton: React.FC<AddressButtonProps> = ({ name, address, to, uniswap, unitext, unilink }) => {
+const AddressButton: React.FC<AddressButtonProps> = ({ name, address, uniswap, unitext, unilink }) => {
   const { darkMode } = useTheme();
 
   const DisplayUniswap = useMemo(() => {

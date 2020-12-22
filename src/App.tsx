@@ -9,7 +9,6 @@ import TopBar from "components/TopBar";
 import { BalancesProvider } from "contexts/Balances";
 import { FarmingProvider } from "contexts/Farming";
 import { PricesProvider } from "contexts/Prices";
-import { VestingProvider } from "contexts/Vesting";
 import YamProvider from "contexts/YamProvider";
 import useLocalStorage from "hooks/useLocalStorage";
 import styled from "styled-components";
@@ -71,9 +70,7 @@ const Providers: React.FC = ({ children }) => {
           <PricesProvider>
             <BalancesProvider>
               <FarmingProvider>
-                  <VestingProvider>
                     {children}
-                  </VestingProvider>
               </FarmingProvider>
             </BalancesProvider>
           </PricesProvider>
