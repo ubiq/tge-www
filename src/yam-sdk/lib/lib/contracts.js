@@ -168,7 +168,7 @@ export class Contracts {
     this.reserves2.options.address = "0x97990B693835da58A281636296D2Bf02787DEa17";
     this.otc.options.address = "0x92ab5CCe7Af1605da2681458aE52a0BEc4eCB74C";
     this.gov3.options.address = "0xC32f9b0292965c5dd4A0Ea1abfcC1f5a36d66986";
-    this.voting_eth_pool.options.address = "0xD67c05523D8ec1c60760Fd017Ef006b9F6e496D0";
+    this.voting_eth_pool.options.address = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
     this.eth_rebaser.options.address = "0xD93f403b432d39aa0f736C2021bE6051d85a1D55";
     this.masterchef.options.address = "0xc2edad668740f1aa35e4d8f227fb8e17dca888cd";
     this.slp.options.address = "0x0f82e57804d0b1f6fab2370a43dcfad3c7cb239c";
@@ -228,7 +228,7 @@ export class Contracts {
     this.names[this.reserves2.options.address] = "New Reserves";
     this.names[this.gov3.options.address] = "Dual Governor (current)";
     this.names[this.eth_rebaser.options.address] = "ETH Rebaser";
-    this.names[this.voting_eth_pool.options.address] = "Voting ETH/YAM Incentivizer";
+    this.names[this.voting_eth_pool.options.address] = "ESCH/UBQ Shinobi LP Yield Farm";
     this.names[this.masterchef.options.address] = "Master Chef";
     this.names[this.slp.options.address] = "Sushiswap LP";
     this.names[this.SushibarXSushi.options.address] = "Sushi Bar XSushi";
