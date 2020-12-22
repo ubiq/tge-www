@@ -380,16 +380,6 @@ export const getWETHPrice = async () => {
   return data.market_data.current_price.usd;
 };
 
-export const getYUSDPrice = async () => {
-  const data = await requestHttp("https://api.coingecko.com/api/v3/coins/yvault-lp-ycurve");
-  return data.market_data.current_price.usd;
-};
-
-export const getINDEXCOOPPrice = async () => {
-  const data = await requestHttp("https://api.coingecko.com/api/v3/coins/index-cooperative");
-  return data.market_data.current_price.usd;
-};
-
 export const getYam = async () => {
   const data = await requestHttp("https://api.coingecko.com/api/v3/coins/yam-2");
   return data;
