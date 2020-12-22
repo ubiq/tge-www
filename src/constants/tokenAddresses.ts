@@ -11,4 +11,3 @@ export const ESCHUBQSLPAddress = "0xF102Ad140b26C3c6AF9E9358DA9dEAA27CB1dbEA";
 
 export const ContractTimelock = "0x8b4f1616751117C38a0f84F9A146cca191ea3EC5";
 export const ContractIncentivizer = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
-export const ContractIndexStaking = "0x205Cc7463267861002b27021C7108Bc230603d0F";

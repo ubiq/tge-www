@@ -4,7 +4,7 @@ import { yUsd as yUsdAddress, TGE1 as yamV3Address, DPI as DPIAddress, WETH, IND
 
 import usePrices from "hooks/usePrices";
 import useTokenBalance from "hooks/useTokenBalance";
-import { getIndexCoopLP, getINDEXCOOPPrice } from "yam-sdk/utils";
+import { getINDEXCOOPPrice } from "yam-sdk/utils";
 
 const treasuryAddress = "0x97990b693835da58a281636296d2bf02787dea17";
 
