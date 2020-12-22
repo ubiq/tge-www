@@ -8,11 +8,6 @@ import YAMJson from "../clean_build/contracts/YAMDelegator.json";
 import YAMRebaserJson from "../clean_build/contracts/YAMRebaser.json";
 import YAMRebaser2Json from "../clean_build/contracts/YAMRebaser2.json";
 
-import OTCJson from "../clean_build/contracts/OTC.json";
-
-import YAMGovJson from "../clean_build/contracts/GovernorAlpha.json";
-import DualGovJson from "../clean_build/contracts/DualGovernorAlpha.json";
-
 import WETHJson from "./weth.json";
 import UNIFactJson from "./unifact2.json";
 import UNIPairJson from "./uni2.json";
@@ -45,10 +40,6 @@ export class Contracts {
 
     this.rebaser = new this.web3.eth.Contract(YAMRebaserJson.abi);
     this.eth_rebaser = new this.web3.eth.Contract(YAMRebaser2Json.abi);
-    this.otc = new this.web3.eth.Contract(OTCJson.abi);
-    this.gov = new this.web3.eth.Contract(YAMGovJson.abi);
-    this.gov2 = new this.web3.eth.Contract(YAMGovJson.abi);
-    this.gov3 = new this.web3.eth.Contract(DualGovJson.abi);
     this.weth = new this.web3.eth.Contract(WETHJson);
     this.setProvider(provider, networkId);
     this.setDefaultAccount(this.web3.eth.defaultAccount);
@@ -57,13 +48,10 @@ export class Contracts {
   setProvider(provider, networkId) {
     this.yam.setProvider(provider);
     this.rebaser.setProvider(provider);
-    this.gov.setProvider(provider);
     const contracts = [
       { contract: this.yam, json: YAMJson },
       { contract: this.rebaser, json: YAMRebaserJson },
       { contract: this.eth_rebaser, json: YAMRebaser2Json },
-      { contract: this.gov, json: YAMGovJson },
-      { contract: this.otc, json: OTCJson },
       { contract: this.yamV2, json: YAMv2Json },
       { contract: this.TGE1, json: YAMv3Json },
     ];
@@ -71,21 +59,14 @@ export class Contracts {
     contracts.forEach((contract) => this.setContractProvider(contract.contract, contract.json, provider, networkId));
     this.uni_fact.options.address = addressMap["uniswapFactoryV2"];
     this.uni_router.options.address = addressMap["UNIRouter"];
-    this.gov2.options.address = "0x78BdD33e95ECbcAC16745FB28DB0FFb703344026";
-    this.otc.options.address = "0x92ab5CCe7Af1605da2681458aE52a0BEc4eCB74C";
-    this.gov3.options.address = "0xC32f9b0292965c5dd4A0Ea1abfcC1f5a36d66986";
     this.voting_eth_pool.options.address = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
     this.eth_rebaser.options.address = "0xD93f403b432d39aa0f736C2021bE6051d85a1D55";
 
     this.names = {};
     this.names[this.yam.options.address] = "YAMv1";
     this.names[this.rebaser.options.address] = "Rebaser";
-    this.names[this.gov.options.address] = "Previous Governor";
     this.names[this.yamV2.options.address] = "YAMv2";
-    this.names[this.TGE1.options.address] = "YAM (v3)";
-    this.names[this.gov2.options.address] = "Second Governor";
-    this.names[this.otc.options.address] = "OTC";
-    this.names[this.gov3.options.address] = "Dual Governor (current)";
+    this.names[this.TGE1.options.address] = "TGE1";
     this.names[this.eth_rebaser.options.address] = "ETH Rebaser";
     this.names[this.voting_eth_pool.options.address] = "ESCH/UBQ Shinobi LP Yield Farm";
   }
