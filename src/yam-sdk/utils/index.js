@@ -213,7 +213,6 @@ export const getCirculatingSupply = async (yam) => {
     return 0;
   }
   let yamsDistributed = yam.toBigN((8 * timePassed * 250000) / 625000); //yams from first 8 pools
-  let starttimePool2 = yam.toBigN(await yam.contracts.ycrv_pool.methods.starttime().call()).toNumber();
   timePassed = now["timestamp"] - starttime;
   let pool2Yams = yam.toBigN((timePassed * 1500000) / 625000); // yams from second pool. note: just accounts for first week
   let circulating = pool2Yams
@@ -328,7 +327,6 @@ export const getProposals = async (yam) => {
     toBlock: 10926022,
   });
   let proposals = [];
-  let v1Descriptions = [];
   for (let i = 0; i < v1Proposals.length; i++) {
     let id = v1Proposals[i]["returnValues"]["id"];
     let targets = [];
@@ -624,7 +622,6 @@ export const currVested = async (yam, account) => {
 
 export const currUnclaimedDelegatorRewards = async (yam, account) => {
   let BASE = new BigNumber(10).pow(18);
-  let BASE24 = new BigNumber(10).pow(24);
 
   let start = new BigNumber(1600444800);
   let duration = new BigNumber(90 * 86400);
@@ -642,7 +639,6 @@ export const currUnclaimedDelegatorRewards = async (yam, account) => {
 
 export const currUnclaimedMigratorVesting = async (yam, account) => {
   let BASE = new BigNumber(10).pow(18);
-  let BASE24 = new BigNumber(10).pow(24);
 
   let start = new BigNumber(1600444800);
   let duration = new BigNumber(30 * 86400);
@@ -660,7 +656,6 @@ export const currUnclaimedMigratorVesting = async (yam, account) => {
 
 export const delegatorRewards = async (yam, account) => {
   let BASE = new BigNumber(10).pow(18);
-  let BASE24 = new BigNumber(10).pow(24);
 
   let rewards = new BigNumber(await yam.contracts.migrator.methods.delegator_vesting(account).call());
   let amt = await yamToFragment(yam, rewards);
@@ -684,13 +679,12 @@ export const migrateV3 = async (yam, account, onTxHash) => {
   });
 };
 
-export const claimVested = async (yam, account, onTxHash) => {
+export const claimVested = async (yam, account) => {
   return await yam.contracts.migrator.methods.claimVested().send({ from: account, gas: 140000 });
 };
 
 export const scalingFactors = async (yam) => {
   let BASE = new BigNumber(10).pow(18);
-  let BASE24 = new BigNumber(10).pow(24);
 
   let rebases = await yam.contracts.TGE1.getPastEvents("Rebase", {
     fromBlock: 10886913,
@@ -712,7 +706,6 @@ export const scalingFactors = async (yam) => {
 
 export const treasuryEvents = async (yam) => {
   let BASE = new BigNumber(10).pow(18);
-  let BASE24 = new BigNumber(10).pow(24);
 
   let rebases = await yam.contracts.rebaser.getPastEvents("TreasuryIncreased", {
     fromBlock: 10886913,

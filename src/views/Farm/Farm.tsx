@@ -29,7 +29,6 @@ const Farm: React.FC = () => {
     <Page>
       <PageHeader icon="🌾🦖" subtitle="Stake ESCH/UBQ Shinobi LP tokens and grow TGE1s" title="Farm" />
       <Container>
-        {/* <PausedLPsNotice /> */}
         <Spacer />
         <Split>
           <StakeCard />

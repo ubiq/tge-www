@@ -5,7 +5,6 @@ import Page from "components/Page";
 import PageHeader from "components/PageHeader";
 import {
   ContractIncentivizer,
-  ContractTimelock,
   ESCH,
   TGE1,
 } from "constants/tokenAddresses";
@@ -27,7 +26,6 @@ const Addresses: React.FC = () => {
         <AddressButton name="ESCH" address={ESCH} uniswap={true} />
 
         <h3>TGE1 Contracts Addresses</h3>
-        <AddressButton name="Timelock" address={ContractTimelock} uniswap={false} />
         <AddressButton name="Incentivizer" address={ContractIncentivizer} uniswap={false} />
       </Container>
     </Page>
