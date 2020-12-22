@@ -29,18 +29,18 @@ const Provider: React.FC = ({ children }) => {
   const yam = useYam();
   const { account } = useWallet();
 
-  const ESCHUBQPoolAddress = yam ? yam.contracts.voting_eth_pool.options.address : "";
+  const ESCHUBQPoolAddress = yam ? yam.contracts.shinobi_pool.options.address : "";
   const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, ESCHUBQPoolAddress, () => setConfirmTxModalIsOpen(false));
 
   const fetchearnedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
-    const balance = await getEarned(yam, yam.contracts.voting_eth_pool, account);
+    const balance = await getEarned(yam, yam.contracts.shinobi_pool, account);
     setearnedBalanceESCHUBQ(balance);
   }, [account, setearnedBalanceESCHUBQ, yam]);
 
   const fetchstakedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
-    const balance = await getStaked(yam, yam.contracts.voting_eth_pool, account);
+    const balance = await getStaked(yam, yam.contracts.shinobi_pool, account);
     setstakedBalanceESCHUBQ(balance);
   }, [account, setstakedBalanceESCHUBQ, yam]);
 
@@ -57,7 +57,7 @@ const Provider: React.FC = ({ children }) => {
   const handleHarvestESCHUBQ = useCallback(async () => {
     if (!yam) return;
     setConfirmTxModalIsOpen(true);
-    await harvest(yam, account, yam.contracts.voting_eth_pool, () => {
+    await harvest(yam, account, yam.contracts.shinobi_pool, () => {
       setConfirmTxModalIsOpen(false);
       setIsHarvesting(true);
     });
@@ -67,7 +67,7 @@ const Provider: React.FC = ({ children }) => {
   const handleRedeemESCHUBQ = useCallback(async () => {
     if (!yam) return;
     setConfirmTxModalIsOpen(true);
-    await redeem(yam, account, yam.contracts.voting_eth_pool, () => {
+    await redeem(yam, account, yam.contracts.shinobi_pool, () => {
       setConfirmTxModalIsOpen(false);
       setIsRedeeming(true);
     });
@@ -78,7 +78,7 @@ const Provider: React.FC = ({ children }) => {
     async (amount: string) => {
       if (!yam) return;
       setConfirmTxModalIsOpen(true);
-      await stake(yam, amount, account, yam.contracts.voting_eth_pool, () => {
+      await stake(yam, amount, account, yam.contracts.shinobi_pool, () => {
         setConfirmTxModalIsOpen(false);
         setIsStaking(true);
       });
@@ -91,7 +91,7 @@ const Provider: React.FC = ({ children }) => {
     async (amount: string) => {
       if (!yam) return;
       setConfirmTxModalIsOpen(true);
-      await unstake(yam, amount, account, yam.contracts.voting_eth_pool, () => {
+      await unstake(yam, amount, account, yam.contracts.shinobi_pool, () => {
         setConfirmTxModalIsOpen(false);
         setIsUnstaking(true);
       });

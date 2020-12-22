@@ -12,7 +12,7 @@ import UNIFactJson from "./unifact2.json";
 import UNIPairJson from "./uni2.json";
 import UNIRouterJson from "./uniR.json";
 
-import VotingIncJson from "../clean_build/contracts/YAMIncentivizerWithVoting.json";
+import UnipoolJson from "../clean_build/contracts/Unipool.json";
 
 import YAMv3Json from "../clean_build/contracts/YAMDelegatorV3.json";
 import YAMLogic2Json from "../clean_build/contracts/YAMDelegate2.json";
@@ -31,7 +31,7 @@ export class Contracts {
     this.uni_fact = new this.web3.eth.Contract(UNIFactJson);
     this.yam = new this.web3.eth.Contract(YAMJson.abi);
 
-    this.voting_eth_pool = new this.web3.eth.Contract(VotingIncJson.abi);
+    this.shinobi_pool = new this.web3.eth.Contract(UnipoolJson.abi);
 
     this.TGE1 = new this.web3.eth.Contract(YAMLogic2Json.abi);
 
@@ -55,7 +55,7 @@ export class Contracts {
     contracts.forEach((contract) => this.setContractProvider(contract.contract, contract.json, provider, networkId));
     this.uni_fact.options.address = addressMap["uniswapFactoryV2"];
     this.uni_router.options.address = addressMap["UNIRouter"];
-    this.voting_eth_pool.options.address = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
+    this.shinobi_pool.options.address = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
     this.eth_rebaser.options.address = "0xD93f403b432d39aa0f736C2021bE6051d85a1D55";
 
     this.names = {};
@@ -63,7 +63,7 @@ export class Contracts {
     this.names[this.rebaser.options.address] = "Rebaser";
     this.names[this.TGE1.options.address] = "TGE1";
     this.names[this.eth_rebaser.options.address] = "ETH Rebaser";
-    this.names[this.voting_eth_pool.options.address] = "ESCH/UBQ Shinobi LP Yield Farm";
+    this.names[this.shinobi_pool.options.address] = "ESCH/UBQ Shinobi LP Yield Farm";
   }
 
   setDefaultAccount(account) {
