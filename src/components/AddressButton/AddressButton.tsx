@@ -66,7 +66,7 @@ const AddressButton: React.FC<AddressButtonProps> = ({ name, address, uniswap, u
             <StyledName darkMode={darkMode} uniswap={uniswap}>
               {name ? name + " " : ""}
             </StyledName>
-            <StyledLink darkMode={darkMode} color="hsl(339deg 89% 49% / 100%)" href={"https://etherscan.io/address/" + address} target="_blank">
+            <StyledLink darkMode={darkMode} color="hsl(339deg 89% 49% / 100%)" href={"https://ubiqscan.io/address/" + address} target="_blank">
               {DisplayAddress}
             </StyledLink>
             <StyledCopy
