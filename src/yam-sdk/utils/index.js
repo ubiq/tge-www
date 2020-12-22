@@ -291,31 +291,11 @@ export const vote = async (yam, proposal, side, account, onTxHash) => {
   });
 };
 
-const stateMap = {
-  0: "Pending",
-  1: "Active",
-  2: "Canceled",
-  3: "Defeated",
-  4: "Succeeded",
-  5: "Queued",
-  6: "Expired",
-  7: "Executed",
-};
 
 export const getScalingFactor = async (yam) => {
   return new BigNumber(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
 };
 
-export const getV2Supply = async (yam) => {
-  return new BigNumber(await yam.contracts.yamV2.methods.totalSupply().call());
-};
-
-const yamToFragment = async (yam, amount) => {
-  let BASE24 = new BigNumber(10).pow(24);
-  let scalingFactor = new BigNumber(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
-
-  return amount.multipliedBy(scalingFactor).dividedBy(BASE24);
-};
 
 export const scalingFactors = async (yam) => {
   let BASE = new BigNumber(10).pow(18);

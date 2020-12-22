@@ -2,7 +2,6 @@ import BigNumber from "bignumber.js/bignumber";
 import * as Types from "./types.js";
 import { SUBTRACT_GAS_LIMIT, addressMap } from "./constants.js";
 
-import YAMv2Json from "../clean_build/contracts/YAMv2.json";
 import YAMJson from "../clean_build/contracts/YAMDelegator.json";
 
 import YAMRebaserJson from "../clean_build/contracts/YAMRebaser.json";
@@ -34,8 +33,6 @@ export class Contracts {
 
     this.voting_eth_pool = new this.web3.eth.Contract(VotingIncJson.abi);
 
-    this.yamV2 = new this.web3.eth.Contract(YAMv2Json.abi);
-
     this.TGE1 = new this.web3.eth.Contract(YAMLogic2Json.abi);
 
     this.rebaser = new this.web3.eth.Contract(YAMRebaserJson.abi);
@@ -52,7 +49,6 @@ export class Contracts {
       { contract: this.yam, json: YAMJson },
       { contract: this.rebaser, json: YAMRebaserJson },
       { contract: this.eth_rebaser, json: YAMRebaser2Json },
-      { contract: this.yamV2, json: YAMv2Json },
       { contract: this.TGE1, json: YAMv3Json },
     ];
 
@@ -65,7 +61,6 @@ export class Contracts {
     this.names = {};
     this.names[this.yam.options.address] = "YAMv1";
     this.names[this.rebaser.options.address] = "Rebaser";
-    this.names[this.yamV2.options.address] = "YAMv2";
     this.names[this.TGE1.options.address] = "TGE1";
     this.names[this.eth_rebaser.options.address] = "ETH Rebaser";
     this.names[this.voting_eth_pool.options.address] = "ESCH/UBQ Shinobi LP Yield Farm";
