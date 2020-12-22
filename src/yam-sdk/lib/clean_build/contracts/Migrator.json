@@ -154,7 +154,7 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "yamV3",
+      "name": "TGE1",
       "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
       "payable": false,
       "stateMutability": "view",

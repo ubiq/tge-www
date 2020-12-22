@@ -151,7 +151,7 @@ export const getPoolContracts = async (yam) => {
 };
 
 export const getEarned = async (yam, pool, account) => {
-  const scalingFactor = new BigNumber(await yam.contracts.yamV3.methods.yamsScalingFactor().call());
+  const scalingFactor = new BigNumber(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
   const earned = new BigNumber(await pool.methods.earned(account).call());
   return earned.multipliedBy(scalingFactor.dividedBy(new BigNumber(10).pow(18)));
 };
@@ -206,7 +206,7 @@ export const getRebaseLag = async (yam) => {
 
 export const getCirculatingSupply = async (yam) => {
   let now = await yam.web3.eth.getBlock("latest");
-  let scalingFactor = yam.toBigN(await yam.contracts.yamV3.methods.yamsScalingFactor().call());
+  let scalingFactor = yam.toBigN(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
   let starttime = yam.toBigN(await yam.contracts.eth_pool.methods.starttime().call()).toNumber();
   let timePassed = now["timestamp"] - starttime;
   if (timePassed < 0) {
@@ -272,7 +272,7 @@ export const getStats = async (yam) => {
 };
 
 export const delegate = async (yam, account, onTxHash) => {
-  return yam.contracts.yamV3.methods.delegate(account).send({ from: account, gas: 150000 }, async (error, txHash) => {
+  return yam.contracts.TGE1.methods.delegate(account).send({ from: account, gas: 150000 }, async (error, txHash) => {
     if (error) {
       onTxHash && onTxHash("");
       console.log("Delegate error", error);
@@ -289,7 +289,7 @@ export const delegate = async (yam, account, onTxHash) => {
 };
 
 export const didDelegate = async (yam, account) => {
-  return (await yam.contracts.yamV3.methods.delegates(account).call()) === account;
+  return (await yam.contracts.TGE1.methods.delegates(account).call()) === account;
 };
 
 export const vote = async (yam, proposal, side, account, onTxHash) => {
@@ -524,7 +524,7 @@ export const getVotingPowers = async (yam, proposals, account) => {
       let receipt = await yam.contracts.gov.methods.getReceipt(proposals[i].id, account).call();
       let power = new BigNumber(receipt[2]).div(BASE24).toNumber();
       if (power == 0) {
-        power = new BigNumber(await yam.contracts.yamV3.methods.getPriorVotes(account, proposals[i].start).call()).div(BASE24).toNumber();
+        power = new BigNumber(await yam.contracts.TGE1.methods.getPriorVotes(account, proposals[i].start).call()).div(BASE24).toNumber();
       }
       powers.push({
         hash: proposals[i].hash,
@@ -536,7 +536,7 @@ export const getVotingPowers = async (yam, proposals, account) => {
       let receipt = await yam.contracts.gov2.methods.getReceipt(proposals[i].id, account).call();
       let power = new BigNumber(receipt[2]).div(BASE24).toNumber();
       if (power == 0) {
-        power = new BigNumber(await yam.contracts.yamV3.methods.getPriorVotes(account, proposals[i].start).call()).div(BASE24).toNumber();
+        power = new BigNumber(await yam.contracts.TGE1.methods.getPriorVotes(account, proposals[i].start).call()).div(BASE24).toNumber();
       }
       powers.push({
         hash: proposals[i].hash,
@@ -563,7 +563,7 @@ export const getVotingPowers = async (yam, proposals, account) => {
 
 export const getCurrentVotingPower = async (yam, account) => {
   let BASE24 = new BigNumber(10).pow(24);
-  return new BigNumber(await yam.contracts.yamV3.methods.getCurrentVotes(account).call()).dividedBy(BASE24).toNumber();
+  return new BigNumber(await yam.contracts.TGE1.methods.getCurrentVotes(account).call()).dividedBy(BASE24).toNumber();
 };
 
 export const getVotes = async (yam) => {
@@ -574,7 +574,7 @@ export const getVotes = async (yam) => {
 };
 
 export const getScalingFactor = async (yam) => {
-  return new BigNumber(await yam.contracts.yamV3.methods.yamsScalingFactor().call());
+  return new BigNumber(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
 };
 
 export const getDelegatedBalance = async (yam, account) => {
@@ -609,7 +609,7 @@ export const migrationStarted = async (yam) => {
 
 const yamToFragment = async (yam, amount) => {
   let BASE24 = new BigNumber(10).pow(24);
-  let scalingFactor = new BigNumber(await yam.contracts.yamV3.methods.yamsScalingFactor().call());
+  let scalingFactor = new BigNumber(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
 
   return amount.multipliedBy(scalingFactor).dividedBy(BASE24);
 };
@@ -692,7 +692,7 @@ export const scalingFactors = async (yam) => {
   let BASE = new BigNumber(10).pow(18);
   let BASE24 = new BigNumber(10).pow(24);
 
-  let rebases = await yam.contracts.yamV3.getPastEvents("Rebase", {
+  let rebases = await yam.contracts.TGE1.getPastEvents("Rebase", {
     fromBlock: 10886913,
     toBlock: "latest",
   });
@@ -700,9 +700,6 @@ export const scalingFactors = async (yam) => {
   let blockNumbers = [];
   let blockTimes = [];
   for (let i = 0; i < rebases.length; i++) {
-    // const block = await yam.web3.eth.getBlock(rebases[i]["blockNumber"])
-    // blockNumbers.push(block.blockNumber);
-    // blockTimes.push(block.timestamp);
     blockNumbers.push(rebases[i]["blockNumber"]);
     scalingFactors.push(Math.round(new BigNumber(rebases[i]["returnValues"]["prevYamsScalingFactor"]).div(BASE).toNumber() * 100) / 100);
   }
@@ -734,9 +731,6 @@ export const treasuryEvents = async (yam) => {
   let blockNumbers = [];
   let blockTimes = [];
   for (let i = 0; i < rebases.length; i++) {
-    // const block = await yam.web3.eth.getBlock(rebases[i]["blockNumber"])
-    // blockNumbers.push(block.blockNumber);
-    // blockTimes.push(block.timestamp);
     blockNumbers.push(rebases[i]["blockNumber"]);
     reservesAdded.push(Math.round(new BigNumber(rebases[i]["returnValues"]["reservesAdded"]).div(BASE).toNumber() * 100) / 100);
     yamsSold.push(Math.round(new BigNumber(rebases[i]["returnValues"]["yamsSold"]).div(BASE).toNumber() * 100) / 100);

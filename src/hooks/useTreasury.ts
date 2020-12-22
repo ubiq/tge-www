@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { yUsd as yUsdAddress, yamv3 as yamV3Address, DPI as DPIAddress, WETH, INDEX } from "constants/tokenAddresses";
+import { yUsd as yUsdAddress, TGE1 as yamV3Address, DPI as DPIAddress, WETH, INDEX } from "constants/tokenAddresses";
 
 import usePrices from "hooks/usePrices";
 import useTokenBalance from "hooks/useTokenBalance";

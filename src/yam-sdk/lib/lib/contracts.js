@@ -96,7 +96,7 @@ export class Contracts {
     this.yamV2 = new this.web3.eth.Contract(YAMv2Json.abi);
     this.yamV2migration = new this.web3.eth.Contract(YAMv2MigrationJson.abi);
 
-    this.yamV3 = new this.web3.eth.Contract(YAMLogic2Json.abi);
+    this.TGE1 = new this.web3.eth.Contract(YAMLogic2Json.abi);
     this.migrator = new this.web3.eth.Contract(MigratorJson.abi);
 
     this.rebaser = new this.web3.eth.Contract(YAMRebaserJson.abi);
@@ -140,7 +140,7 @@ export class Contracts {
       { contract: this.comp_pool, json: COMPPoolJson },
       { contract: this.yamV2, json: YAMv2Json },
       { contract: this.yamV2migration, json: YAMv2MigrationJson },
-      { contract: this.yamV3, json: YAMv3Json },
+      { contract: this.TGE1, json: YAMv3Json },
       { contract: this.migrator, json: MigratorJson },
       { contract: this.masterchef, json: MasterChefJson },
       { contract: this.slp, json: SushiswapPoolJson },
@@ -221,7 +221,7 @@ export class Contracts {
     this.names[this.yycrv_pool.options.address] = "yUSD Farming";
     this.names[this.yamV2.options.address] = "YAMv2";
     this.names[this.yamV2migration.options.address] = "YAMv1-YAMv2 Migrator";
-    this.names[this.yamV3.options.address] = "YAM (v3)";
+    this.names[this.TGE1.options.address] = "YAM (v3)";
     this.names[this.migrator.options.address] = "Migrator";
     this.names[this.gov2.options.address] = "Second Governor";
     this.names[this.otc.options.address] = "OTC";

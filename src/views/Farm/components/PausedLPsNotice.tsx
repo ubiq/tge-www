@@ -14,7 +14,7 @@ const PausedLPsNotice: React.FC = () => (
           <Button
             size="sm"
             text="Remove Liquidity"
-            href="https://app.uniswap.org/#/remove/0x0AaCfbeC6a24756c20D41914F2caba817C0d8521/0x5dbcf33d8c2e976c6b560249878e6f1491bca25c"
+            href="https://app.uniswap.org/#/remove/0xcf823eb6f62a30EDB005B91383e2fa364dd753Dc/0x5dbcf33d8c2e976c6b560249878e6f1491bca25c"
             variant="secondary"
           />
         </StyledNoticeContentInner>

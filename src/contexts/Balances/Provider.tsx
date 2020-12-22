@@ -3,7 +3,7 @@ import BigNumber from "bignumber.js";
 import { useWallet } from "use-wallet";
 import { provider } from "web3-core";
 
-import { yamv2 as yamV2Address, yamv3 as yamV3Address, ESCHUBQSLPAddress } from "constants/tokenAddresses";
+import { yamv2 as yamV2Address, TGE1 as yamV3Address, ESCHUBQSLPAddress } from "constants/tokenAddresses";
 import { getBalance } from "utils";
 
 import Context from "./Context";

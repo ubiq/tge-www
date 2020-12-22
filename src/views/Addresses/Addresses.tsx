@@ -7,7 +7,7 @@ import {
   ContractIncentivizer,
   ContractTimelock,
   ESCH,
-  yamv3,
+  TGE1,
 } from "constants/tokenAddresses";
 import AddressButton from "components/AddressButton";
 
@@ -19,7 +19,7 @@ const Addresses: React.FC = () => {
         <h2>TGE1 Addresses &amp; Assets</h2>
         <AddressButton
           name="TGE1"
-          address={yamv3}
+          address={TGE1}
           uniswap={false}
           unitext="Buy at Shinobi"
           unilink="https://shinobi.ubiq.ninja/swap?inputCurrency="
