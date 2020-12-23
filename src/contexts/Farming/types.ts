@@ -3,8 +3,6 @@ import BigNumber from "bignumber.js";
 export interface ContextValues {
   countdown?: number;
   earnedBalance?: BigNumber;
-  tvl?: number;
-  apr?: number;
   farmingStartTime: number;
   isApproved?: boolean;
   isApproving?: boolean;

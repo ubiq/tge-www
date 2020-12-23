@@ -31,13 +31,13 @@ const Provider: React.FC = ({ children }) => {
 
   const fetchearnedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
-    const balance = await getEarned(yam, yam.contracts.shinobi_pool, account);
+    const balance = await getEarned(yam.contracts.shinobi_pool, account);
     setearnedBalanceESCHUBQ(balance);
   }, [account, setearnedBalanceESCHUBQ, yam]);
 
   const fetchstakedBalanceESCHUBQ = useCallback(async () => {
     if (!account || !yam) return;
-    const balance = await getStaked(yam, yam.contracts.shinobi_pool, account);
+    const balance = await getStaked(yam.contracts.shinobi_pool, account);
     setstakedBalanceESCHUBQ(balance);
   }, [account, setstakedBalanceESCHUBQ, yam]);
 

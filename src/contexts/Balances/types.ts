@@ -1,6 +1,6 @@
 import BigNumber from "bignumber.js";
 
 export interface ContextValues {
-  yamV3Balance?: BigNumber;
+  TGE1Balance?: BigNumber;
   ESCHUBQLPBalance?: BigNumber;
 }

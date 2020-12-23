@@ -2,10 +2,6 @@ import { ethers } from "ethers";
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
 import request from "request";
-import { bnToDec } from "utils";
-
-// temp
-import { ContractIncentivizer } from "constants/tokenAddresses";
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -26,7 +22,6 @@ export const getPoolStartTime = async (poolContract) => {
 
 export const stake = async (yam, amount, account, poolContract, onTxHash) => {
   let now = new Date().getTime() / 1000;
-  // const gas = GAS_LIMIT.STAKING[tokenName.toUpperCase()] || GAS_LIMIT.STAKING.DEFAULT;
   const gas = GAS_LIMIT.STAKING.DEFAULT;
   if (now >= 1597172400) {
     return poolContract.methods
@@ -133,61 +128,16 @@ export const getPoolContracts = async (yam) => {
   return pools;
 };
 
-export const getEarned = async (yam, pool, account) => {
+export const getEarned = async (pool, account) => {
   return new BigNumber(await pool.methods.earned(account).call());
 };
 
-export const getStaked = async (yam, pool, account) => {
+export const getStaked = async (pool, account) => {
   return new BigNumber(await pool.methods.balanceOf(account).call());
-};
-
-export const getCurrentPrice = async (yam) => {
-  // FORBROCK: get current YAM price
-  return new BigNumber(await yam.contracts.eth_rebaser.methods.getCurrentTWAP().call());
-};
-
-export const getTargetPrice = async (yam) => {
-  return yam.toBigN(1).toFixed(2);
-};
-
-export const getProjectedRebase = async (yam) => {
-  let projected_rebase_perc = await getProjectedRebasePercent(yam);
-  if (projected_rebase_perc == 0) return 0;
-  let total_supply = new BigNumber(await getMaxSupply());
-  return total_supply.dividedBy(100).times(projected_rebase_perc).toNumber();
-};
-
-export const getProjectedRebasePercent = async (yam) => {
-  let BASE = new BigNumber(10).pow(18);
-  let twap = (await getCurrentPrice(yam)).dividedBy(BASE);
-  if (twap.isGreaterThanOrEqualTo(0.95) && twap.isLessThanOrEqualTo(1.05)) return 0;
-  let target_price = await getTargetPrice(yam);
-  let rebase_lag = await getRebaseLag(yam);
-  let deviation = twap.minus(target_price).dividedBy(target_price);
-  return deviation.dividedBy(rebase_lag).times(100).toNumber();
-};
-
-export const getProjectedMint = async (yam) => {
-  let rebase = await getProjectedRebase(yam);
-  let mint_percent = await getProjectedMintPercent(yam);
-  return rebase <= 0 ? 0 : (rebase * mint_percent) / 100;
-};
-
-export const getProjectedMintPercent = async (yam, rebaseType) => {
-  let BASE = new BigNumber(10).pow(18);
-  if (!rebaseType) {
-    return 0;
-  }
-  return new BigNumber(await yam.contracts.eth_rebaser.methods.rebaseMintPerc().call()).div(BASE).times(100).toNumber();
-};
-
-export const getRebaseLag = async (yam) => {
-  return await yam.contracts.eth_rebaser.methods.rebaseLag().call();
 };
 
 export const getCirculatingSupply = async (yam) => {
   let now = await yam.web3.eth.getBlock("latest");
-  let scalingFactor = yam.toBigN(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
   let starttime = yam.toBigN(await yam.contracts.eth_pool.methods.starttime().call()).toNumber();
   let timePassed = now["timestamp"] - starttime;
   if (timePassed < 0) {
@@ -198,38 +148,9 @@ export const getCirculatingSupply = async (yam) => {
   let pool2Yams = yam.toBigN((timePassed * 1500000) / 625000); // yams from second pool. note: just accounts for first week
   let circulating = pool2Yams
     .plus(yamsDistributed)
-    .times(scalingFactor)
     .dividedBy(10 ** 36)
     .toFixed(2);
   return circulating;
-};
-
-export const getLastRebaseTimestamp = async (yam) => {
-  try {
-    const lastTimestamp = yam.toBigN(await yam.contracts.eth_rebaser.methods.lastRebaseTimestampSec().call()).toNumber();
-    return lastTimestamp;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const getNextRebaseTimestamp = async (yam) => {
-  try {
-    let now = await yam.web3.eth.getBlock("latest").then((res) => res.timestamp);
-    let interval = 43200; // 12 hours
-    let offset = 28800; // 8am/8pm utc
-    let secondsToRebase = 0;
-    if (await yam.contracts.eth_rebaser.methods.rebasingActive().call()) {
-      if (now % interval > offset) {
-        secondsToRebase = interval - (now % interval) + offset;
-      } else {
-        secondsToRebase = offset - (now % interval);
-      }
-    }
-    return secondsToRebase;
-  } catch (e) {
-    console.log(e);
-  }
 };
 
 export const getTotalSupply = async (yam) => {
@@ -237,99 +158,12 @@ export const getTotalSupply = async (yam) => {
 };
 
 export const getStats = async (yam) => {
-  const curPrice = await getCurrentPrice(yam);
   const circSupply = await getCirculatingSupply(yam);
-  const nextRebase = await getNextRebaseTimestamp(yam);
-  const targetPrice = await getTargetPrice(yam);
   const totalSupply = await getTotalSupply(yam);
   return {
     circSupply,
-    curPrice,
-    nextRebase,
-    targetPrice,
     totalSupply,
   };
-};
-
-export const delegate = async (yam, account, onTxHash) => {
-  return yam.contracts.TGE1.methods.delegate(account).send({ from: account, gas: 150000 }, async (error, txHash) => {
-    if (error) {
-      onTxHash && onTxHash("");
-      console.log("Delegate error", error);
-      return false;
-    }
-    onTxHash && onTxHash(txHash);
-    const status = await waitTransaction(yam.web3.eth, txHash);
-    if (!status) {
-      console.log("Delegate transaction failed.");
-      return false;
-    }
-    return true;
-  });
-};
-
-export const didDelegate = async (yam, account) => {
-  return (await yam.contracts.TGE1.methods.delegates(account).call()) === account;
-};
-
-export const vote = async (yam, proposal, side, account, onTxHash) => {
-  return yam.contracts.gov3.methods.castVote(proposal, side).send({ from: account, gas: 180000 }, async (error, txHash) => {
-    if (error) {
-      onTxHash && onTxHash("");
-      console.log("Vote error", error);
-      return false;
-    }
-    onTxHash && onTxHash(txHash);
-    const status = await waitTransaction(yam.web3.eth, txHash);
-    if (!status) {
-      console.log("Vote transaction failed.");
-      return false;
-    }
-    return true;
-  });
-};
-
-
-export const getScalingFactor = async (yam) => {
-  return new BigNumber(await yam.contracts.TGE1.methods.yamsScalingFactor().call());
-};
-
-
-export const scalingFactors = async (yam) => {
-  let BASE = new BigNumber(10).pow(18);
-
-  let rebases = await yam.contracts.TGE1.getPastEvents("Rebase", {
-    fromBlock: 10886913,
-    toBlock: "latest",
-  });
-  let scalingFactors = [];
-  let blockNumbers = [];
-  let blockTimes = [];
-  for (let i = 0; i < rebases.length; i++) {
-    blockNumbers.push(rebases[i]["blockNumber"]);
-    scalingFactors.push(Math.round(new BigNumber(rebases[i]["returnValues"]["prevYamsScalingFactor"]).div(BASE).toNumber() * 100) / 100);
-  }
-  return {
-    factors: scalingFactors,
-    blockNumbers: blockNumbers,
-    blockTimes: blockTimes,
-  };
-};
-
-export const getTVL = async (yam) => {
-  const BASE = new BigNumber(10).pow(18);
-  const yamPrice = bnToDec(await getCurrentPrice(yam));
-  const wethPrice = await getWETHPrice();
-  const totalIncentivizerValue = (await yam.contracts.masterchef.methods.userInfo(44, ContractIncentivizer).call()).amount;
-  const totalSLPSupply = await yam.contracts.slp.methods.totalSupply().call();
-  const totalSLPReserves = await yam.contracts.slp.methods.getReserves().call();
-  const Yamvalue = new BigNumber(totalSLPReserves._reserve0).dividedBy(BASE).toNumber();
-  const ETHvalue = new BigNumber(totalSLPReserves._reserve1).dividedBy(BASE).toNumber();
-  return Math.round((totalIncentivizerValue / totalSLPSupply) * (ETHvalue * wethPrice + Yamvalue * yamPrice) * 1) / 1;
-};
-
-export const getRebaseType = (rebaseValue) => {
-  return Math.sign(rebaseValue) === 1;
 };
 
 const sleep = (ms) => {

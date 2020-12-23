@@ -3,13 +3,13 @@ import BigNumber from "bignumber.js";
 import { useWallet } from "use-wallet";
 import { provider } from "web3-core";
 
-import { TGE1 as yamV3Address, ESCHUBQSLPAddress } from "constants/tokenAddresses";
+import { TGE1, ESCHUBQSLPAddress } from "constants/tokenAddresses";
 import { getBalance } from "utils";
 
 import Context from "./Context";
 
 const Provider: React.FC = ({ children }) => {
-  const [yamV3Balance, setYamV3Balance] = useState<BigNumber>();
+  const [TGE1Balance, setTGE1Balance] = useState<BigNumber>();
   const [ESCHUBQLPBalance, setESCHUBQLPBalance] = useState<BigNumber>();
 
   const { account, ethereum }: { account: string | null; ethereum: provider } = useWallet();
@@ -17,13 +17,13 @@ const Provider: React.FC = ({ children }) => {
   const fetchBalances = useCallback(
     async (userAddress: string, provider: provider) => {
       const balances = await Promise.all([
-        await getBalance(provider, yamV3Address, userAddress),
+        await getBalance(provider, TGE1, userAddress),
         await getBalance(provider, ESCHUBQSLPAddress, userAddress),
       ]);
-      setYamV3Balance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(18)));
+      setTGE1Balance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(18)));
       setESCHUBQLPBalance(new BigNumber(balances[1]).dividedBy(new BigNumber(10).pow(18)));
     },
-    [setYamV3Balance, setESCHUBQLPBalance]
+    [setTGE1Balance, setESCHUBQLPBalance]
   );
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Provider: React.FC = ({ children }) => {
   return (
     <Context.Provider
       value={{
-        yamV3Balance,
+        TGE1Balance,
         ESCHUBQLPBalance,
       }}
     >

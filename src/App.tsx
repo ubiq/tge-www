@@ -8,7 +8,6 @@ import TopBar from "components/TopBar";
 
 import { BalancesProvider } from "contexts/Balances";
 import { FarmingProvider } from "contexts/Farming";
-import { PricesProvider } from "contexts/Prices";
 import YamProvider from "contexts/YamProvider";
 import useLocalStorage from "hooks/useLocalStorage";
 import styled from "styled-components";
@@ -67,13 +66,11 @@ const Providers: React.FC = ({ children }) => {
         chainId={8}
       >
         <YamProvider>
-          <PricesProvider>
-            <BalancesProvider>
-              <FarmingProvider>
-                    {children}
-              </FarmingProvider>
-            </BalancesProvider>
-          </PricesProvider>
+          <BalancesProvider>
+            <FarmingProvider>
+              {children}
+            </FarmingProvider>
+          </BalancesProvider>
         </YamProvider>
       </UseWalletProvider>
     </ThemeProvider>

@@ -13,7 +13,7 @@ import useBalances from "hooks/useBalances";
 const WalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
   const [, setWalletModalIsOpen] = useState(false);
   const { reset } = useWallet();
-  const { yamV3Balance } = useBalances();
+  const { TGE1Balance } = useBalances();
 
 
   const getDisplayBalance = useCallback((value?: BigNumber) => {
@@ -43,7 +43,7 @@ const WalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
       <ModalTitle text="My Wallet" />
       <ModalContent>
           <Box row>
-            <FancyValue icon="🦖" label="TGE1 balance" value={getDisplayBalance(yamV3Balance)} />
+            <FancyValue icon="🦖" label="TGE1 balance" value={getDisplayBalance(TGE1Balance)} />
           </Box>
         <Spacer />
       </ModalContent>
