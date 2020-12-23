@@ -4,7 +4,7 @@ import { Container } from "react-neu";
 import Page from "components/Page";
 import PageHeader from "components/PageHeader";
 import {
-  ContractIncentivizer,
+  TGE1ESCHUBQYieldFarm,
   ESCH,
   TGE1,
 } from "constants/tokenAddresses";
@@ -26,7 +26,7 @@ const Addresses: React.FC = () => {
         <AddressButton name="ESCH" address={ESCH} uniswap={true} />
 
         <h3>TGE1 Contracts Addresses</h3>
-        <AddressButton name="Incentivizer" address={ContractIncentivizer} uniswap={false} />
+        <AddressButton name="Yield Farm" address={TGE1ESCHUBQYieldFarm} uniswap={false} />
       </Container>
     </Page>
   );
