@@ -2,20 +2,13 @@ import BigNumber from "bignumber.js/bignumber";
 import * as Types from "./types.js";
 import { SUBTRACT_GAS_LIMIT, addressMap } from "./constants.js";
 
-import YAMJson from "../clean_build/contracts/YAMDelegator.json";
-
-import YAMRebaserJson from "../clean_build/contracts/YAMRebaser.json";
-import YAMRebaser2Json from "../clean_build/contracts/YAMRebaser2.json";
-
+import ERC20Json from '../clean_build/contracts/IERC20.json';
 import WETHJson from "./weth.json";
 import UNIFactJson from "./unifact2.json";
 import UNIPairJson from "./uni2.json";
 import UNIRouterJson from "./uniR.json";
 
 import UnipoolJson from "../clean_build/contracts/Unipool.json";
-
-import YAMv3Json from "../clean_build/contracts/YAMDelegatorV3.json";
-import YAMLogic2Json from "../clean_build/contracts/YAMDelegate2.json";
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
@@ -29,45 +22,32 @@ export class Contracts {
     this.uni_pair = new this.web3.eth.Contract(UNIPairJson);
     this.uni_router = new this.web3.eth.Contract(UNIRouterJson);
     this.uni_fact = new this.web3.eth.Contract(UNIFactJson);
-    this.yam = new this.web3.eth.Contract(YAMJson.abi);
 
     this.shinobi_pool = new this.web3.eth.Contract(UnipoolJson.abi);
 
-    this.TGE1 = new this.web3.eth.Contract(YAMLogic2Json.abi);
+    this.TGE1 = new this.web3.eth.Contract(ERC20Json.abi);
 
-    this.rebaser = new this.web3.eth.Contract(YAMRebaserJson.abi);
-    this.eth_rebaser = new this.web3.eth.Contract(YAMRebaser2Json.abi);
     this.weth = new this.web3.eth.Contract(WETHJson);
     this.setProvider(provider, networkId);
     this.setDefaultAccount(this.web3.eth.defaultAccount);
   }
 
   setProvider(provider, networkId) {
-    this.yam.setProvider(provider);
-    this.rebaser.setProvider(provider);
     const contracts = [
-      { contract: this.yam, json: YAMJson },
-      { contract: this.rebaser, json: YAMRebaserJson },
-      { contract: this.eth_rebaser, json: YAMRebaser2Json },
-      { contract: this.TGE1, json: YAMv3Json },
+      { contract: this.TGE1, json: ERC20Json },
     ];
 
     contracts.forEach((contract) => this.setContractProvider(contract.contract, contract.json, provider, networkId));
     this.uni_fact.options.address = addressMap["uniswapFactoryV2"];
     this.uni_router.options.address = addressMap["UNIRouter"];
     this.shinobi_pool.options.address = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
-    this.eth_rebaser.options.address = "0xD93f403b432d39aa0f736C2021bE6051d85a1D55";
 
     this.names = {};
-    this.names[this.yam.options.address] = "YAMv1";
-    this.names[this.rebaser.options.address] = "Rebaser";
     this.names[this.TGE1.options.address] = "TGE1";
-    this.names[this.eth_rebaser.options.address] = "ETH Rebaser";
     this.names[this.shinobi_pool.options.address] = "ESCH/UBQ Shinobi LP Yield Farm";
   }
 
   setDefaultAccount(account) {
-    this.yam.options.from = account;
     this.weth.options.from = account;
   }
 
