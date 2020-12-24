@@ -10,7 +10,6 @@ import { BalancesProvider } from "contexts/Balances";
 import { FarmingProvider } from "contexts/Farming";
 import YamProvider from "contexts/YamProvider";
 import useLocalStorage from "hooks/useLocalStorage";
-import styled from "styled-components";
 
 import Farm from "views/Farm";
 import Home from "views/Home";
@@ -73,15 +72,5 @@ const Providers: React.FC = ({ children }) => {
     </ThemeProvider>
   );
 };
-
-const StyledLink = styled.a`
-  color: ${(props) => props.theme.colors.grey[500]};
-  padding-left: ${(props) => props.theme.spacing[3]}px;
-  padding-right: ${(props) => props.theme.spacing[3]}px;
-  text-decoration: none;
-  &:hover {
-    color: ${(props) => props.theme.colors.grey[600]};
-  }
-`;
 
 export default App;

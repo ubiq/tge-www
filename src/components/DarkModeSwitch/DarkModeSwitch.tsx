@@ -6,7 +6,7 @@ import useLocalStorage from "hooks/useLocalStorage";
 
 const DarkModeSwitch: React.FC = () => {
   const { darkMode, onToggleDarkMode } = useTheme();
-  const [_, setDarkModeSetting] = useLocalStorage("darkMode", darkMode);
+  const [, setDarkModeSetting] = useLocalStorage("darkMode", darkMode);
 
   useEffect(() => {
     if (darkMode) {
