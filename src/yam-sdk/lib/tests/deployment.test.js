@@ -2,7 +2,6 @@ import { Yam } from "../index.js";
 
 export const yam = new Yam(
   "http://localhost:8545/",
-  // "http://127.0.0.1:9545/",
   "1001",
   true,
   {
@@ -55,16 +54,6 @@ describe("post-deployment", () => {
   });
 
   describe("contract ownership", () => {
-    test("yam gov", async () => {
-      let gov = await yam.contracts.yam.methods.gov().call();
-      expect(gov).toBe(yam.contracts.timelock.options.address);
-    });
-
-    test("reserves gov", async () => {
-      let gov = await yam.contracts.reserves.methods.gov().call();
-      expect(gov).toBe(yam.contracts.timelock.options.address);
-    });
-
     test("pool owner", async () => {
       let owner = await yam.contracts.eth_pool.methods.owner().call();
       expect(owner).toBe(yam.contracts.timelock.options.address);

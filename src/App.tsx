@@ -42,9 +42,6 @@ const App: React.FC = () => {
           <Route exact path="/addresses">
             <Addresses />
           </Route>
-          <StyledLink href="https://yam.gitbook.io/yam/" target="_blank">
-            Docs
-          </StyledLink>
         </Switch>
       </Providers>
     </Router>
