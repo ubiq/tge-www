@@ -42,7 +42,7 @@ const UnlockWalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
       <ModalContent>
         <StyledWalletsWrapper>
           <Box flex={1}>
-            <WalletProviderCard icon={<img src={injectedLogo} style={{ height: 32 }} />} name={injectedName} onSelect={handleConnectMetamask} />
+            <WalletProviderCard icon={<img src={injectedLogo} style={{ height: 32 }} alt="Wallet Logo"/>} name={injectedName} onSelect={handleConnectMetamask} />
           </Box>
         </StyledWalletsWrapper>
       </ModalContent>

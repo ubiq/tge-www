@@ -1,11 +1,7 @@
 import { Yam } from "../index.js";
-import * as Types from "../lib/types.js";
-import { addressMap } from "../lib/constants.js";
-import { decimalToString, stringToDecimal } from "../lib/Helpers.js";
 
 export const yam = new Yam(
   "http://localhost:8545/",
-  // "http://127.0.0.1:9545/",
   "1001",
   true,
   {
@@ -19,7 +15,6 @@ export const yam = new Yam(
     ethereumNodeTimeout: 10000,
   }
 );
-const oneEther = 10 ** 18;
 
 describe("token_tests", () => {
   let snapshotId;
