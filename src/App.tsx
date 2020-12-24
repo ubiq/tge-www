@@ -58,14 +58,10 @@ const Providers: React.FC = ({ children }) => {
   }, []);
   return (
     <ThemeProvider darkModeEnabled={darkModeSetting} darkTheme={darkTheme} lightTheme={lightTheme}>
-      <UseWalletProvider
-        chainId={8}
-      >
+      <UseWalletProvider chainId={8}>
         <YamProvider>
           <BalancesProvider>
-            <FarmingProvider>
-              {children}
-            </FarmingProvider>
+            <FarmingProvider>{children}</FarmingProvider>
           </BalancesProvider>
         </YamProvider>
       </UseWalletProvider>

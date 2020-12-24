@@ -15,7 +15,6 @@ const WalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
   const { reset } = useWallet();
   const { TGE1Balance } = useBalances();
 
-
   const getDisplayBalance = useCallback((value?: BigNumber) => {
     if (value) {
       return numeral(value).format("0.00a");
@@ -42,9 +41,9 @@ const WalletModal: React.FC<ModalProps> = ({ isOpen, onDismiss }) => {
     <Modal isOpen={isOpen}>
       <ModalTitle text="My Wallet" />
       <ModalContent>
-          <Box row>
-            <FancyValue icon="🦖" label="TGE1 balance" value={getDisplayBalance(TGE1Balance)} />
-          </Box>
+        <Box row>
+          <FancyValue icon="🦖" label="TGE1 balance" value={getDisplayBalance(TGE1Balance)} />
+        </Box>
         <Spacer />
       </ModalContent>
       <Separator />

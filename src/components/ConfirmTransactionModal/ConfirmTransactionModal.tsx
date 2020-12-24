@@ -21,7 +21,7 @@ const ConfirmTransactionModal: React.FC<ModalProps> = ({ isOpen }) => {
 
   const WalletLogo = useMemo(() => {
     if (connector === "injected") {
-      return <img src={injectedLogo} alt="Wallet Logo" style={{ height: 96, width: 96, alignSelf:"center" }}/>;
+      return <img src={injectedLogo} alt="Wallet Logo" style={{ height: 96, width: 96, alignSelf: "center" }} />;
     }
   }, [connector]);
 

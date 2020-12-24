@@ -16,10 +16,7 @@ const Provider: React.FC = ({ children }) => {
 
   const fetchBalances = useCallback(
     async (userAddress: string, provider: provider) => {
-      const balances = await Promise.all([
-        await getBalance(provider, TGE1, userAddress),
-        await getBalance(provider, ESCHUBQSLPAddress, userAddress),
-      ]);
+      const balances = await Promise.all([await getBalance(provider, TGE1, userAddress), await getBalance(provider, ESCHUBQSLPAddress, userAddress)]);
       setTGE1Balance(new BigNumber(balances[0]).dividedBy(new BigNumber(10).pow(18)));
       setESCHUBQLPBalance(new BigNumber(balances[1]).dividedBy(new BigNumber(10).pow(18)));
     },
