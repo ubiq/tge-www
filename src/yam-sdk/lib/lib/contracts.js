@@ -8,7 +8,7 @@ import UNIFactJson from "./unifact2.json";
 import UNIPairJson from "./uni2.json";
 import UNIRouterJson from "./uniR.json";
 
-import UnipoolJson from "../clean_build/contracts/Unipool.json";
+import ShinobiPoolJson from "../clean_build/contracts/ShinobiPool.json";
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
@@ -23,7 +23,7 @@ export class Contracts {
     this.uni_router = new this.web3.eth.Contract(UNIRouterJson);
     this.uni_fact = new this.web3.eth.Contract(UNIFactJson);
 
-    this.shinobi_pool = new this.web3.eth.Contract(UnipoolJson.abi);
+    this.shinobi_pool = new this.web3.eth.Contract(ShinobiPoolJson.abi);
 
     this.TGE1 = new this.web3.eth.Contract(ERC20Json.abi);
 
@@ -40,7 +40,7 @@ export class Contracts {
     contracts.forEach((contract) => this.setContractProvider(contract.contract, contract.json, provider, networkId));
     this.uni_fact.options.address = addressMap["uniswapFactoryV2"];
     this.uni_router.options.address = addressMap["UNIRouter"];
-    this.shinobi_pool.options.address = "0x8F8c66370f05DB40ea1f7F5a2064c588920e8599";
+    this.shinobi_pool.options.address = "0x32DEDccBf19F5AbF40dd8D2A1204bdcE4dE5aa53";
 
     this.names = {};
     this.names[this.TGE1.options.address] = "TGE1";
