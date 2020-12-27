@@ -8,7 +8,7 @@ import TopBar from "components/TopBar";
 
 import { BalancesProvider } from "contexts/Balances";
 import { FarmingProvider } from "contexts/Farming";
-import YamProvider from "contexts/YamProvider";
+import UbiqProvider from "contexts/UbiqProvider";
 import useLocalStorage from "hooks/useLocalStorage";
 
 import Farm from "views/Farm";
@@ -59,11 +59,11 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ThemeProvider darkModeEnabled={darkModeSetting} darkTheme={darkTheme} lightTheme={lightTheme}>
       <UseWalletProvider chainId={8}>
-        <YamProvider>
+        <UbiqProvider>
           <BalancesProvider>
             <FarmingProvider>{children}</FarmingProvider>
           </BalancesProvider>
-        </YamProvider>
+        </UbiqProvider>
       </UseWalletProvider>
     </ThemeProvider>
   );

@@ -6,9 +6,9 @@ import { useWallet } from "use-wallet";
 import ConfirmTransactionModal from "components/ConfirmTransactionModal";
 import { ESCHUBQSLPAddress } from "constants/tokenAddresses";
 import useApproval from "hooks/useApproval";
-import useYam from "hooks/useYam";
+import useUbiq from "hooks/useUbiq";
 
-import { getEarned, getStaked, harvest, redeem, stake, unstake } from "yam-sdk/utils";
+import { getEarned, getStaked, harvest, redeem, stake, unstake } from "ubiq-sdk/utils";
 
 import Context from "./Context";
 
@@ -23,7 +23,7 @@ const Provider: React.FC = ({ children }) => {
   const [isUnstaking, setIsUnstaking] = useState(false);
   const [earnedBalanceESCHUBQ, setearnedBalanceESCHUBQ] = useState<BigNumber>();
   const [stakedBalanceESCHUBQ, setstakedBalanceESCHUBQ] = useState<BigNumber>();
-  const yam = useYam();
+  const yam = useUbiq();
   const { account } = useWallet();
 
   const ESCHUBQPoolAddress = yam ? yam.contracts.shinobi_pool.options.address : "";

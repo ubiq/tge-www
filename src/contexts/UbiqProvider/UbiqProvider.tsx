@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 import { useWallet } from "use-wallet";
 
-import { Yam } from "yam-sdk/lib";
+import { Yam } from "ubiq-sdk/lib";
 
 export interface YamContext {
   yam?: any;
@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-const YamProvider: React.FC = ({ children }) => {
+const UbiqProvider: React.FC = ({ children }) => {
   const { ethereum } = useWallet();
   const [yam, setYam] = useState<any>();
 
@@ -43,4 +43,4 @@ const YamProvider: React.FC = ({ children }) => {
   return <Context.Provider value={{ yam }}>{children}</Context.Provider>;
 };
 
-export default YamProvider;
+export default UbiqProvider;
