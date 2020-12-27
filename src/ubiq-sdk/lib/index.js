@@ -6,5 +6,5 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 });
 
-export { Yam } from "./Yam.js";
+export { Ubiq } from "./Ubiq.js";
 export { Web3, BigNumber };

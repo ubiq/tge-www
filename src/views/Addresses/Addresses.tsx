@@ -12,7 +12,13 @@ const Addresses: React.FC = () => {
       <PageHeader icon={"🎖️"} title={"Addresses"} subtitle={"Official Addresses"} />
       <Container size="sm">
         <h2>TGE1 Addresses &amp; Assets</h2>
-        <AddressButton name="TGE1" address={TGE1} shinobi={false} shinobitext="Buy at Shinobi" shinobilink="https://shinobi.ubiq.ninja/swap?inputCurrency=" />
+        <AddressButton
+          name="TGE1"
+          address={TGE1}
+          shinobi={false}
+          shinobitext="Buy at Shinobi"
+          shinobilink="https://shinobi.ubiq.ninja/swap?inputCurrency="
+        />
         <AddressButton name="ESCH" address={ESCH} shinobi={true} />
 
         <h3>TGE1 Contracts Addresses</h3>

@@ -23,23 +23,23 @@ const Provider: React.FC = ({ children }) => {
   const [isUnstaking, setIsUnstaking] = useState(false);
   const [earnedBalanceESCHUBQ, setearnedBalanceESCHUBQ] = useState<BigNumber>();
   const [stakedBalanceESCHUBQ, setstakedBalanceESCHUBQ] = useState<BigNumber>();
-  const yam = useUbiq();
+  const ubiq = useUbiq();
   const { account } = useWallet();
 
-  const ESCHUBQPoolAddress = yam ? yam.contracts.shinobi_pool.options.address : "";
+  const ESCHUBQPoolAddress = ubiq ? ubiq.contracts.shinobi_pool.options.address : "";
   const { isApproved, isApproving, onApprove } = useApproval(ESCHUBQSLPAddress, ESCHUBQPoolAddress, () => setConfirmTxModalIsOpen(false));
 
   const fetchearnedBalanceESCHUBQ = useCallback(async () => {
-    if (!account || !yam) return;
-    const balance = await getEarned(yam.contracts.shinobi_pool, account);
+    if (!account || !ubiq) return;
+    const balance = await getEarned(ubiq.contracts.shinobi_pool, account);
     setearnedBalanceESCHUBQ(balance);
-  }, [account, setearnedBalanceESCHUBQ, yam]);
+  }, [account, setearnedBalanceESCHUBQ, ubiq]);
 
   const fetchstakedBalanceESCHUBQ = useCallback(async () => {
-    if (!account || !yam) return;
-    const balance = await getStaked(yam.contracts.shinobi_pool, account);
+    if (!account || !ubiq) return;
+    const balance = await getStaked(ubiq.contracts.shinobi_pool, account);
     setstakedBalanceESCHUBQ(balance);
-  }, [account, setstakedBalanceESCHUBQ, yam]);
+  }, [account, setstakedBalanceESCHUBQ, ubiq]);
 
   const fetchBalances = useCallback(async () => {
     fetchearnedBalanceESCHUBQ();
@@ -52,9 +52,9 @@ const Provider: React.FC = ({ children }) => {
   }, [onApprove, setConfirmTxModalIsOpen]);
 
   const handleHarvestESCHUBQ = useCallback(async () => {
-    if (!yam) return;
+    if (!ubiq) return;
     setConfirmTxModalIsOpen(true);
-    await harvest(yam, account, yam.contracts.shinobi_pool, () => {
+    await harvest(ubiq, account, ubiq.contracts.shinobi_pool, () => {
       setConfirmTxModalIsOpen(false);
       setIsHarvesting(true);
     }).catch((err) => {
@@ -65,12 +65,12 @@ const Provider: React.FC = ({ children }) => {
       }
     });
     setIsHarvesting(false);
-  }, [account, setConfirmTxModalIsOpen, setIsHarvesting, yam]);
+  }, [account, setConfirmTxModalIsOpen, setIsHarvesting, ubiq]);
 
   const handleRedeemESCHUBQ = useCallback(async () => {
-    if (!yam) return;
+    if (!ubiq) return;
     setConfirmTxModalIsOpen(true);
-    await redeem(yam, account, yam.contracts.shinobi_pool, () => {
+    await redeem(ubiq, account, ubiq.contracts.shinobi_pool, () => {
       setConfirmTxModalIsOpen(false);
       setIsRedeeming(true);
     }).catch((err) => {
@@ -81,32 +81,32 @@ const Provider: React.FC = ({ children }) => {
       }
     });
     setIsRedeeming(false);
-  }, [account, setConfirmTxModalIsOpen, setIsRedeeming, yam]);
+  }, [account, setConfirmTxModalIsOpen, setIsRedeeming, ubiq]);
 
   const handleStakeESCHUBQ = useCallback(
     async (amount: string) => {
-      if (!yam) return;
+      if (!ubiq) return;
       setConfirmTxModalIsOpen(true);
-      await stake(yam, amount, account, yam.contracts.shinobi_pool, () => {
+      await stake(ubiq, amount, account, ubiq.contracts.shinobi_pool, () => {
         setConfirmTxModalIsOpen(false);
         setIsStaking(true);
       });
       setIsStaking(false);
     },
-    [account, setConfirmTxModalIsOpen, setIsStaking, yam]
+    [account, setConfirmTxModalIsOpen, setIsStaking, ubiq]
   );
 
   const handleUnstakeESCHUBQ = useCallback(
     async (amount: string) => {
-      if (!yam) return;
+      if (!ubiq) return;
       setConfirmTxModalIsOpen(true);
-      await unstake(yam, amount, account, yam.contracts.shinobi_pool, () => {
+      await unstake(ubiq, amount, account, ubiq.contracts.shinobi_pool, () => {
         setConfirmTxModalIsOpen(false);
         setIsUnstaking(true);
       });
       setIsUnstaking(false);
     },
-    [account, setConfirmTxModalIsOpen, setIsUnstaking, yam]
+    [account, setConfirmTxModalIsOpen, setIsUnstaking, ubiq]
   );
 
   useEffect(() => {

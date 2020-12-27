@@ -4,7 +4,7 @@ import { Contracts } from "./lib/contracts.js";
 import { Account } from "./lib/accounts.js";
 import { EVM } from "./lib/evm.js";
 
-export class Yam {
+export class Ubiq {
   constructor(provider, networkId, testing, options) {
     var realProvider;
 

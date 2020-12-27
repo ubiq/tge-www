@@ -2,29 +2,29 @@ import React, { createContext, useEffect, useState } from "react";
 
 import { useWallet } from "use-wallet";
 
-import { Yam } from "ubiq-sdk/lib";
+import { Ubiq } from "ubiq-sdk/lib";
 
-export interface YamContext {
-  yam?: any;
+export interface UbiqContext {
+  ubiq?: any;
 }
 
-export const Context = createContext<YamContext>({
-  yam: undefined,
+export const Context = createContext<UbiqContext>({
+  ubiq: undefined,
 });
 
 declare global {
   interface Window {
-    yamsauce: any;
+    ubiqsauce: any;
   }
 }
 
 const UbiqProvider: React.FC = ({ children }) => {
   const { ethereum } = useWallet();
-  const [yam, setYam] = useState<any>();
+  const [ubiq, setUbiq] = useState<any>();
 
   useEffect(() => {
     if (ethereum) {
-      const yamLib = new Yam(ethereum, "1", false, {
+      const ubiqLib = new Ubiq(ethereum, "1", false, {
         defaultAccount: "",
         defaultConfirmations: 1,
         autoGasMultiplier: 1.5,
@@ -35,12 +35,12 @@ const UbiqProvider: React.FC = ({ children }) => {
         ethereumNodeTimeout: 10000,
       });
 
-      setYam(yamLib);
-      window.yamsauce = yamLib;
+      setUbiq(ubiqLib);
+      window.ubiqsauce = ubiqLib;
     }
   }, [ethereum]);
 
-  return <Context.Provider value={{ yam }}>{children}</Context.Provider>;
+  return <Context.Provider value={{ ubiq }}>{children}</Context.Provider>;
 };
 
 export default UbiqProvider;

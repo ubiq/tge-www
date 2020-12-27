@@ -19,7 +19,7 @@ export const getPoolStartTime = async (poolContract) => {
   return await poolContract.methods.starttime().call();
 };
 
-export const stake = async (yam, amount, account, poolContract, onTxHash) => {
+export const stake = async (ubiq, amount, account, poolContract, onTxHash) => {
   let now = new Date().getTime() / 1000;
   const gas = GAS_LIMIT.STAKING.DEFAULT;
   if (now >= 1597172400) {
@@ -32,7 +32,7 @@ export const stake = async (yam, amount, account, poolContract, onTxHash) => {
           return false;
         }
         onTxHash && onTxHash(txHash);
-        const status = await waitTransaction(yam.web3.eth, txHash);
+        const status = await waitTransaction(ubiq.web3.eth, txHash);
         if (!status) {
           console.log("Staking transaction failed.");
           return false;
@@ -44,7 +44,7 @@ export const stake = async (yam, amount, account, poolContract, onTxHash) => {
   }
 };
 
-export const unstake = async (yam, amount, account, poolContract, onTxHash) => {
+export const unstake = async (ubiq, amount, account, poolContract, onTxHash) => {
   let now = new Date().getTime() / 1000;
   if (now >= 1597172400) {
     return poolContract.methods
@@ -56,7 +56,7 @@ export const unstake = async (yam, amount, account, poolContract, onTxHash) => {
           return false;
         }
         onTxHash && onTxHash(txHash);
-        const status = await waitTransaction(yam.web3.eth, txHash);
+        const status = await waitTransaction(ubiq.web3.eth, txHash);
         if (!status) {
           console.log("Unstaking transaction failed.");
           return false;
@@ -68,7 +68,7 @@ export const unstake = async (yam, amount, account, poolContract, onTxHash) => {
   }
 };
 
-export const harvest = async (yam, account, poolContract, onTxHash) => {
+export const harvest = async (ubiq, account, poolContract, onTxHash) => {
   let now = new Date().getTime() / 1000;
   if (now >= 1597172400) {
     return poolContract.methods.getReward().send({ from: account, gas: GAS_LIMIT.GENERAL }, async (error, txHash) => {
@@ -78,7 +78,7 @@ export const harvest = async (yam, account, poolContract, onTxHash) => {
         return false;
       }
       onTxHash && onTxHash(txHash);
-      const status = await waitTransaction(yam.web3.eth, txHash);
+      const status = await waitTransaction(ubiq.web3.eth, txHash);
       if (!status) {
         console.log("Harvest transaction failed.");
         return false;
@@ -90,7 +90,7 @@ export const harvest = async (yam, account, poolContract, onTxHash) => {
   }
 };
 
-export const redeem = async (yam, account, poolContract, onTxHash) => {
+export const redeem = async (ubiq, account, poolContract, onTxHash) => {
   let now = new Date().getTime() / 1000;
   if (now >= 1597172400) {
     return poolContract.methods.exit().send({ from: account, gas: GAS_LIMIT.GENERAL }, async (error, txHash) => {
@@ -100,7 +100,7 @@ export const redeem = async (yam, account, poolContract, onTxHash) => {
         return false;
       }
       onTxHash && onTxHash(txHash);
-      const status = await waitTransaction(yam.web3.eth, txHash);
+      const status = await waitTransaction(ubiq.web3.eth, txHash);
       if (!status) {
         console.log("Redeem transaction failed.");
         return false;
@@ -116,12 +116,12 @@ export const approve = async (tokenContract, poolContract, account) => {
   return tokenContract.methods.approve(poolContract.options.address, ethers.constants.MaxUint256).send({ from: account, gas: 80000 });
 };
 
-export const getPoolContracts = async (yam) => {
-  const pools = Object.keys(yam.contracts)
+export const getPoolContracts = async (ubiq) => {
+  const pools = Object.keys(ubiq.contracts)
     .filter((c) => c.indexOf("_pool") !== -1)
     .reduce((acc, cur) => {
       const newAcc = { ...acc };
-      newAcc[cur] = yam.contracts[cur];
+      newAcc[cur] = ubiq.contracts[cur];
       return newAcc;
     }, {});
   return pools;
@@ -133,34 +133,6 @@ export const getEarned = async (pool, account) => {
 
 export const getStaked = async (pool, account) => {
   return new BigNumber(await pool.methods.balanceOf(account).call());
-};
-
-export const getCirculatingSupply = async (yam) => {
-  let now = await yam.web3.eth.getBlock("latest");
-  let starttime = yam.toBigN(await yam.contracts.shinobi_pool.methods.starttime().call()).toNumber();
-  let timePassed = now["timestamp"] - starttime;
-  if (timePassed < 0) {
-    return 0;
-  }
-  timePassed = now["timestamp"] - starttime;
-  let pool2Yams = yam.toBigN((timePassed * 1500000) / 625000); // yams from second pool. note: just accounts for first week
-  let circulating = pool2Yams
-    .dividedBy(10 ** 36)
-    .toFixed(2);
-  return circulating;
-};
-
-export const getTotalSupply = async (yam) => {
-  return await yam.contracts.yam.methods.totalSupply().call();
-};
-
-export const getStats = async (yam) => {
-  const circSupply = await getCirculatingSupply(yam);
-  const totalSupply = await getTotalSupply(yam);
-  return {
-    circSupply,
-    totalSupply,
-  };
 };
 
 const sleep = (ms) => {
@@ -178,9 +150,9 @@ export const waitTransaction = async (provider, txHash) => {
   return txReceipt.status;
 };
 
-export const getCurrentBlock = async (yam) => {
+export const getCurrentBlock = async (ubiq) => {
   try {
-    return await yam.web3.eth.getBlock("latest");
+    return await ubiq.web3.eth.getBlock("latest");
   } catch (e) {
     console.log(e);
   }
