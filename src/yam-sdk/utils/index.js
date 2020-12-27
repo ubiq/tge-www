@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
 import Web3 from "web3";
 import BigNumber from "bignumber.js";
-import request from "request";
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -138,16 +137,14 @@ export const getStaked = async (pool, account) => {
 
 export const getCirculatingSupply = async (yam) => {
   let now = await yam.web3.eth.getBlock("latest");
-  let starttime = yam.toBigN(await yam.contracts.eth_pool.methods.starttime().call()).toNumber();
+  let starttime = yam.toBigN(await yam.contracts.shinobi_pool.methods.starttime().call()).toNumber();
   let timePassed = now["timestamp"] - starttime;
   if (timePassed < 0) {
     return 0;
   }
-  let yamsDistributed = yam.toBigN((8 * timePassed * 250000) / 625000); //yams from first 8 pools
   timePassed = now["timestamp"] - starttime;
   let pool2Yams = yam.toBigN((timePassed * 1500000) / 625000); // yams from second pool. note: just accounts for first week
   let circulating = pool2Yams
-    .plus(yamsDistributed)
     .dividedBy(10 ** 36)
     .toFixed(2);
   return circulating;
@@ -187,42 +184,4 @@ export const getCurrentBlock = async (yam) => {
   } catch (e) {
     console.log(e);
   }
-};
-
-const requestHttp = (url) => {
-  return new Promise((resolve, reject) => {
-    request(
-      {
-        url: url,
-        json: true,
-      },
-      (error, response, body) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(body);
-        }
-      }
-    );
-  });
-};
-
-export const getWETHPrice = async () => {
-  const data = await requestHttp("https://api.coingecko.com/api/v3/coins/weth");
-  return data.market_data.current_price.usd;
-};
-
-export const getYam = async () => {
-  const data = await requestHttp("https://api.coingecko.com/api/v3/coins/yam-2");
-  return data;
-};
-
-export const getMarketCap = async () => {
-  const data = await requestHttp("https://api.coingecko.com/api/v3/coins/yam-2");
-  return data.market_data.market_cap.usd;
-};
-
-export const getMaxSupply = async () => {
-  const data = await requestHttp("https://api.coingecko.com/api/v3/coins/yam-2");
-  return data.market_data.max_supply;
 };
