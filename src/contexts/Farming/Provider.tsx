@@ -57,6 +57,12 @@ const Provider: React.FC = ({ children }) => {
     await harvest(yam, account, yam.contracts.shinobi_pool, () => {
       setConfirmTxModalIsOpen(false);
       setIsHarvesting(true);
+    }).catch((err) => {
+      if (err.code === 4001) {
+        console.log("Wallet: User cancelled");
+      } else {
+        console.log("Error caught:", err);
+      }
     });
     setIsHarvesting(false);
   }, [account, setConfirmTxModalIsOpen, setIsHarvesting, yam]);
@@ -67,6 +73,12 @@ const Provider: React.FC = ({ children }) => {
     await redeem(yam, account, yam.contracts.shinobi_pool, () => {
       setConfirmTxModalIsOpen(false);
       setIsRedeeming(true);
+    }).catch((err) => {
+      if (err.code === 4001) {
+        console.log("Wallet: User cancelled");
+      } else {
+        console.log("Error caught:", err);
+      }
     });
     setIsRedeeming(false);
   }, [account, setConfirmTxModalIsOpen, setIsRedeeming, yam]);

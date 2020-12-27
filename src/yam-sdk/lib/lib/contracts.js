@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js/bignumber";
 import * as Types from "./types.js";
 import { SUBTRACT_GAS_LIMIT, addressMap } from "./constants.js";
 
-import ERC20Json from '../clean_build/contracts/IERC20.json';
+import ERC20Json from "../clean_build/contracts/IERC20.json";
 import WETHJson from "./weth.json";
 import UNIFactJson from "./unifact2.json";
 import UNIPairJson from "./uni2.json";
@@ -33,9 +33,7 @@ export class Contracts {
   }
 
   setProvider(provider, networkId) {
-    const contracts = [
-      { contract: this.TGE1, json: ERC20Json },
-    ];
+    const contracts = [{ contract: this.TGE1, json: ERC20Json }];
 
     contracts.forEach((contract) => this.setContractProvider(contract.contract, contract.json, provider, networkId));
     this.uni_fact.options.address = addressMap["uniswapFactoryV2"];
