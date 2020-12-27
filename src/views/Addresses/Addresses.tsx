@@ -12,11 +12,11 @@ const Addresses: React.FC = () => {
       <PageHeader icon={"🎖️"} title={"Addresses"} subtitle={"Official Addresses"} />
       <Container size="sm">
         <h2>TGE1 Addresses &amp; Assets</h2>
-        <AddressButton name="TGE1" address={TGE1} uniswap={false} unitext="Buy at Shinobi" unilink="https://shinobi.ubiq.ninja/swap?inputCurrency=" />
-        <AddressButton name="ESCH" address={ESCH} uniswap={true} />
+        <AddressButton name="TGE1" address={TGE1} shinobi={false} shinobitext="Buy at Shinobi" shinobilink="https://shinobi.ubiq.ninja/swap?inputCurrency=" />
+        <AddressButton name="ESCH" address={ESCH} shinobi={true} />
 
         <h3>TGE1 Contracts Addresses</h3>
-        <AddressButton name="Yield Farm" address={TGE1ESCHUBQYieldFarm} uniswap={false} />
+        <AddressButton name="Yield Farm" address={TGE1ESCHUBQYieldFarm} shinobi={false} />
       </Container>
     </Page>
   );
