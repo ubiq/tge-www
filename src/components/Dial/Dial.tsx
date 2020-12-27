@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { useTheme } from "react-neu";

@@ -1,6 +1,8 @@
 # Ubiq Token Generation Event (TGE) Framework  🦖
 
-> The Ubiq TGE Framework core website application.
+The Ubiq TGE Framework core website application.
+
+Based off of Yam Frontend: https://github.com/yam-finance/yam-www
 
 ## Developments
 
